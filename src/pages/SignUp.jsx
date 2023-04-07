@@ -2,18 +2,15 @@ import { useState } from 'react';
 import { supabase } from '../client'
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
-import "./styles/Login.css"
+import "./styles/SignUp.css"
 
-const Login = ({setToken}) => {
+const SignUp = () => {
 
     const [formData, setFormData] = useState({
+            fullName: '',
             email: '',
             password: '',
     })
-
-    const [passwordIncorrect, setPasswordIncorrect] = useState(false);
-
-    let navigate = useNavigate();
 
     console.log(formData);
 
@@ -29,30 +26,40 @@ const Login = ({setToken}) => {
 
       async function handleSubmit(e) {
             e.preventDefault();
-            try{
-                  const {data, error} = await supabase.auth.signInWithPassword({
-                        email: formData.email,
-                        password: formData.password
-                  });
-                 
-                  if (error) throw error;
-                  console.log(data);
-                  setToken(data);
-                  navigate('/dashboard')
 
+            try {
+                  const { data, error } = await supabase.auth.signUp(
+                    {
+                      email: formData.email,
+                      password: formData.password,
+                      options: {
+                        data: {
+                          full_name: formData.fullName,
+                        }
+                      }
+                    }
+                  )
+                  if (error) throw error
+                  alert('Check your email for verification link')
             }
-
             catch(error) {
                   console.error(error);
-                  setPasswordIncorrect(true);
             }    
       }      
   
 
   return (
-      <div className="login-container">
-      <h1 className="login-heading">Login</h1>
+    <div className="login-container">
+    <h1 className="login-heading">Sign Up</h1>
             <form onSubmit={handleSubmit}>
+
+                  <input 
+                  placeholder='full name'
+                  name='fullName'
+                  onChange={handleChange}
+                  className='login-input'
+                  />
+
                   <input 
                   placeholder='email'
                   name='email'
@@ -68,17 +75,13 @@ const Login = ({setToken}) => {
                   className='login-input'
                   />
 
-                  <button className='login-button' type='submit'>Login</button>
-
-                  {passwordIncorrect && <p className='login-error'>Incorrect email or password</p>}
+                  <button className='login-button' type='submit'>Sign Up</button>
             </form>
-            Don't have an account? <Link to='/'>Sign Up</Link>
-           
-            
+            Already have an account? <Link to='/login'>Login</Link>
       </div>
 
       
   );
 };
 
-export default Login;
+export default SignUp;
