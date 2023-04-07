@@ -1,23 +1,9 @@
 import React, { useState } from 'react';
 import './NavigationBar.css';
 import { Link } from 'react-router-dom';
+import {supabase } from '../client';
 
 const NavigationBar = () => {
-  // set initial state to false, assuming user is not logged in
-  const [isLogged, setIsLogged] = useState(false);
-
-  // function to handle login
-  const handleLogin = () => {
-    setIsLogged(true);
-  };
-
-  // function to handle logout
-  const handleLogout = () => {
-    setIsLogged(false);
-  };
-
-  // set the tile of Account link based on user's login status
-  const accountTitle = isLogged ? 'Account' : 'Login / Sign Up';
 
   return (
     <nav>
@@ -30,13 +16,12 @@ const NavigationBar = () => {
       <div className='menu-container'>
         <ul className='menu'>
           <li>
-            <Link style={{color: 'white', textDecoration: "none"}} to="/">Home</Link>
+            <Link style={{color: 'white', textDecoration: "none"}} to="/">Dashboard</Link>
           </li>
           <li>
            <Link style={{color: 'white', textDecoration: "none"}} to="/createPost">Create Post</Link>
           </li>
           <li>
-            <Link style={{color: 'white', textDecoration: "none"}} to={isLogged ? '/account' : '/login'}>{accountTitle}</Link>
           </li>
         </ul>
       </div>
