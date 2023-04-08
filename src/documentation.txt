@@ -1,0 +1,5 @@
+1. Authnetication
+* Struggled with signing and loggin in when my supabase version was different than other tutorials' versions, solved the issue by finding a tutorial that was using the same version as me.
+
+2. CRUD operation + api from RPM
+* Struggled with getting user id, solved by utilizing chatgpt to understand the bugs and what was the source

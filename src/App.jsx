@@ -10,9 +10,20 @@ import SignUp from './pages/SignUp'
 import NavigationBar from './components/NavigationBar'
 
 
-function App() {
 
+function App() {
   const [token, setToken] = useState(false);
+  const [user, setUser] = useState(false);
+
+// passing user id to create post
+  useEffect(() => {
+    if(sessionStorage.getItem('token')){
+      let data = JSON.parse(sessionStorage.getItem('token'));
+      setUser(data);
+    }
+  }, [])
+  
+
   if(token){
     sessionStorage.setItem('token', JSON.stringify(token));
   }
@@ -32,7 +43,10 @@ function App() {
     },
     {
     path: '/create',
-    element: <CreatePost />
+    element: token ? <CreatePost token={token}
+    userId={user?.id}
+    />
+      : <Login setToken={setToken}/>
     },
     {
     path: '/edit/:id',
@@ -40,7 +54,8 @@ function App() {
     },
     {
     path: '/account',
-    element: <Account />
+    element: token ? <Account token={token}/>
+      : <Login setToken={setToken}/>
     },
     {
     path: '/login',
