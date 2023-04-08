@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { supabase } from '../client'
-import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import "./styles/SignUp.css"
 

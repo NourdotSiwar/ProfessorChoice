@@ -24,4 +24,4 @@ dist-ssr
 *.sw?
 
 # adding client.jsx folder
-client.jsx
+.env
