@@ -8,7 +8,7 @@ import Account from './pages/Account'
 import Login from './pages/Login'
 import SignUp from './pages/SignUp'
 import NavigationBar from './components/NavigationBar'
-
+import DetailedPost from './pages/DetailedPost'
 
 
 function App() {
@@ -63,6 +63,10 @@ function App() {
     {
     path: '/',
     element: <SignUp />
+    },
+    {
+    path: '/post/:id',
+    element: <DetailedPost />
     }
     ]);
 
