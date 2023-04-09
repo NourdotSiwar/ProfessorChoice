@@ -80,8 +80,8 @@ const ReadPosts = ( {token}) => {
                                     {searchPosts(searchInput).map((post) => (
                                           <div className='post' key={post.id}>
                                                 <p>{new Date(post.created_at).toLocaleString()}</p>
-                                                <h3>{post.title}</h3>
-                                                <p>{post.content}</p>
+                                                <Link to={`/post/${post.id}`}><h3>{post.title}</h3></Link>
+                                                <p>{post.content.length > 100 ? post.content.substring(0, 100) + '...' : post.content} </p>
 
                                                 <div className='buttonDiv'>
                                                       {post.user_id === token.user.id ? (
@@ -103,8 +103,8 @@ const ReadPosts = ( {token}) => {
                               {posts.map((post) => (
                                     <div className='post' key={post.id}>
                                           <p>{new Date(post.created_at).toLocaleString()}</p>
-                                          <h3>{post.title}</h3>
-                                          <p>{post.content}</p>
+                                          <Link to={`/post/${post.id}`}><h3>{post.title}</h3></Link>
+                                                <p>{post.content.length > 100 ? post.content.substring(0, 100) + '...' :post.content}</p>
 
                                           <div className='buttonDiv'>
                                                 {post.user_id === token.user.id ? (
