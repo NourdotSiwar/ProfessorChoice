@@ -23,7 +23,6 @@ function App() {
     }
   }, [])
   
-
   if(token){
     sessionStorage.setItem('token', JSON.stringify(token));
   }
@@ -50,7 +49,7 @@ function App() {
     },
     {
     path: '/edit/:id',
-    element: <EditPost />
+    element: <EditPost token={token}/>
     },
     {
     path: '/account',

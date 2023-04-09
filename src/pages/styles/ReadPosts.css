@@ -1,3 +1,9 @@
+
+.read-posts-div{
+    display: flex;
+    flex-direction: column;
+    margin-top: 50px;
+}
 .posts-container {
       display: flex;
       flex-wrap: wrap;
@@ -26,26 +32,15 @@
     .order-by-container {
       display: flex;
       justify-content: center;
+      align-items: center;
       margin-top: 20px;
     }
     
-    .order-by-container button {
-      background-color: teal;
-      color: white;
-      border: none;
-      padding: 10px;
+    .order-by-container p {
       margin-right: 10px;
-      cursor: pointer;
-      border-radius: 5px;
-      height: 40px;
     }
     
-    .order-by-container button:disabled {
-      opacity: 0.5;
-      cursor: not-allowed;
-    }
-    
-    .upvotesBtn {
+    .order-by-container button {
       background-color: teal;
       color: white;
       border: none;
@@ -53,10 +48,51 @@
       font-size: 16px;
       cursor: pointer;
       border-radius: 5px;
+      margin: 5px;
     }
     
-    .upvotesBtn:hover {
+    .order-by-container button:hover {
       background-color: #e6e6e6;
       color:#333;
     }
+
+    .order-by-container button:disabled {
+      background-color: #d3d3d3;
+      cursor: not-allowed;
+      color: teal;
+    }
     
+    
+
+    .buttonDiv{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: 20px;
+    }
+    
+    .upvotesBtn, .editBtn {
+      background-color: teal;
+      color: white;
+      border: none;
+      padding: 10px;
+      font-size: 16px;
+      cursor: pointer;
+      border-radius: 5px;
+      margin: 5px;
+    }
+
+    .upvotesBtn{
+      width: 100px;
+    }
+    
+    .upvotesBtn:hover, .editBtn:hover {
+      background-color: #e6e6e6;
+      color: #333;
+    }
+
+    .upvotesBtn:disabled {
+      background-color: #d3d3d3;
+      cursor: not-allowed;
+      color: teal;
+    }

@@ -15,8 +15,6 @@ const Login = ({setToken}) => {
 
     let navigate = useNavigate();
 
-    console.log(formData);
-
     function handleChange(e) {
         setFormData((prevFormData) =>{
             return {
