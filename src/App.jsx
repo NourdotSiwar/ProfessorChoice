@@ -66,7 +66,7 @@ function App() {
     },
     {
     path: '/post/:id',
-    element: <DetailedPost />
+    element: <DetailedPost token={token}/>
     }
     ]);
 
