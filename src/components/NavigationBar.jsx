@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import {supabase } from '../client';
 import './styles/NavigationBar.css'
 
 const NavigationBar = () => {
@@ -9,9 +8,6 @@ const NavigationBar = () => {
     <nav>
       <div className='title-container'>
         <a className='title' href="/">ProfessorChoice</a>
-      </div>
-      <div className='search-container'>
-        <input type="text" placeholder="Search..." />
       </div>
       <div className='menu-container'>
         <ul className='menu'>

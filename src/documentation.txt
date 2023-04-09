@@ -6,4 +6,8 @@
 * Utilized chatgpt to add the upvote functionality as I struggled with having all posts update when I click only one button of one post
 * Used chatgpt to create quick css templates for each page
 
-3.
+3. search functionality
+* struggled with search functionality between navigation bar and dashboard so i moved the bar to the dashboard and used one of my labs
+* played with the css to understand why posts kept getting squished, solved by playing with the width
+
+4. Detailed Post 
