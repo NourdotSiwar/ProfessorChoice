@@ -27,11 +27,6 @@ const CreatePost = () => {
       const createPost = async (event) => {
             event.preventDefault();
 
-        // Get the values from the form
-          //  const title = document.getElementById('title').value;
-         //   const content = document.getElementById('content').value;
-
-
         const { data: user_data,  error: user_error } = await supabase
         .from('Users')
         .select('id')
@@ -54,27 +49,10 @@ const CreatePost = () => {
             console.log('Data inserted successfully:', post_data);
         }
     
+         // Redirect to the gallery page
+        window.location = "/dashboard";
     }
-/*
-        try {
-            // Insert the new object into the database
-        const { data, error } = await supabase
-        .from('posts')
-        .insert(post)
-        .select();
-
-        if (error) {
-        console.log('Error inserting data:', error);
-        } else {
-        console.log('Data inserted successfully:', data);
-        }
-        } catch (error) {
-        console.log('Error inserting data:', error);
-        }
-
-        // Redirect to the gallery page
-        // window.location = "/dashboard";
-        }*/
+        
 
 
     return (
