@@ -1,12 +1,13 @@
 import React, { useState, useEffect} from 'react';
 import { supabase } from '../client';
 import './styles/ReadPosts.css';
+import { Link } from 'react-router-dom';
 
-
-const readPosts = ({token}) => {
+const ReadPosts = ( {token}) => {
 
       const [posts, setPosts] = useState([]);
       const [order, setOrder] = useState('newest');
+      const [upvotes, setUpvotes] = useState({});
 
       useEffect(() => {
             const fetchPosts = async () => {
@@ -25,9 +26,8 @@ const readPosts = ({token}) => {
             fetchPosts().catch(console.error);
           }, [order]);
 
-          const [upvotes, setUpvotes] = useState({});
-
           const updateUpvote = async (postId) => {
+
             const { error } = await supabase
             .from('posts')
             .update({ upvotes: (upvotes[postId] || 0) + 1 })
@@ -44,7 +44,7 @@ const readPosts = ({token}) => {
         }
    
       return (
-            <div>
+            <div className='read-posts-div'>
                       <h3>welcome back, {token.user.user_metadata.full_name }</h3>
                         <div className='order-by-container'>
                         <p> Order by: </p> 
@@ -59,8 +59,24 @@ const readPosts = ({token}) => {
                                                 <p>{new Date(post.created_at).toLocaleString()}</p>
                                                 <h3>{post.title}</h3>
                                                 <p>{post.content}</p>
-                                                <button className='upvotesBtn' onClick={() => updateUpvote(post.id)}>👍: {post.upvotes}</button>
+
+                                                <div className='buttonDiv'>
+                                                     
+                                                      
+                                                      
+                                                      {post.user_id === token.user.id ? (
+                                                            <button className='upvotesBtn' disabled>
+                                                                  {post.upvotes || 0} △
+                                                            </button>
+                                                      ) : (
+                                                            <button className='upvotesBtn' onClick={() => updateUpvote(post.id)}>{post.upvotes} ▲</button>
+                                                      )}
+                                                     
+                                                {post.user_id === token.user.id &&  
+                                                <Link to={`/edit/${post.id}`}><button className='editBtn'>Edit</button> </Link>}
+                                                </div>
                                           </div>
+
                                     )) : (
                                           <div className='no-posts'>
                                                 <p>There are no posts yet</p>
@@ -71,4 +87,5 @@ const readPosts = ({token}) => {
       )
       }
 
-export default readPosts;
+export default ReadPosts;
+
