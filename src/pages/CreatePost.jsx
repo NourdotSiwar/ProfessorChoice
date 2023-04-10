@@ -6,7 +6,9 @@ const CreatePost = () => {
 
     const [title, setTitle] = React.useState('');
     const [content, setContent] = React.useState('');
+    const [flag, setFlag] = React.useState(false);
     const [user, setUser] = React.useState(null);
+
 
     React.useEffect(() => {
         const session = supabase.auth.session;
@@ -14,10 +16,8 @@ const CreatePost = () => {
 
         const {
             data: authListener,
-        } 
-        = supabase.auth.onAuthStateChange(async (event, session) => {
-            setUser(session?.user ?? null);
-        });
+        }  = supabase.auth.onAuthStateChange(async (event, session) => {
+            setUser(session?.user ?? null); });
 
         return () => {
             authListener.unsubscribe;
@@ -27,19 +27,20 @@ const CreatePost = () => {
       const createPost = async (event) => {
             event.preventDefault();
 
+        const flair = document.querySelector('input[name="flair"]:checked').value;
+
         const { data: user_data,  error: user_error } = await supabase
         .from('Users')
         .select('id')
         .eq('email', user.email)
         .single();
 
-        
         const user_id = user.id;
 
         const { data: post_data, error } = await supabase
         .from('posts')
         .insert({
-            title, content, user_id
+            title, content, user_id, flair
         })
         .select();
 
@@ -59,6 +60,15 @@ const CreatePost = () => {
         <div className='create-post-container'>
             <h2>Create a Post</h2>
             <form>
+
+            <div className='flag'>
+                <input type="radio" id="opinion" name="flair" value="opinion" />
+                <label htmlFor="opinion">opinion</label>
+                <input type="radio" id="question" name="flair" value="question"/>
+                <label htmlFor="question">question</label>
+                </div>
+
+
                   <div className='form-group'>
                         <label htmlFor='title'>Title</label>
                         <input type='text' value={title} onChange={(e) => setTitle(e.target.value)
@@ -70,6 +80,9 @@ const CreatePost = () => {
                         <textarea id='content' value={content} onChange={(e) => setContent(e.target.value)}
                          type='text' name="content"></textarea>
                   </div>
+
+            
+
                   
                   <input type="submit" value="Submit" onClick={createPost} />
 

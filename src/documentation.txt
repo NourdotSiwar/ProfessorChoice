@@ -11,3 +11,10 @@
 * played with the css to understand why posts kept getting squished, solved by playing with the width
 
 4. Detailed Post 
+* Uitlized lab 6 to be able to post title and content
+
+5. Flag System
+
+6. Comment System
+
+

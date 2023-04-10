@@ -5,26 +5,46 @@ import { Link } from 'react-router-dom';
 
 const ReadPosts = ( {token}) => {
 
-      const [posts, setPosts] = useState([]);
+      const [post, setPost] = useState([]);
       const [order, setOrder] = useState('newest');
       const [upvotes, setUpvotes] = useState({});
+      const [searchInput, setSearchInput] = useState('')
+      const [flair, setFlair] = useState('')
+      const [filteredPosts, setFilteredPosts] = useState([])
 
-            // this is the state that will be used to store the search input
-            const [searchInput, setSearchInput] = useState('')
-
-            // this is the state that will be used to store the filtered results
-            const [filteredResults, setFilteredResults] = useState([])
-
-            // function that will search for posts by title 
-            const searchPosts = (searchInput) => {
+            const filterPosts = (posts) => {
                   return posts.filter((post) => {
+                        const postFlair = post.flair.toLowerCase();
                         const postTitle = post.title.toLowerCase();
-                        return postTitle.includes(searchInput.toLowerCase());
+                        const postContent = post.content.toLowerCase();
+                        return postFlair.includes(flair.toLowerCase()) && (postTitle.includes(searchInput.toLowerCase()) || postContent.includes(searchInput.toLowerCase()));
                   });
             };
 
+            const searchPost = (posts) => {
+                  return post.filter((post) => {
+                        const postTitle = post.title.toLowerCase();
+                        const postContent = post.content.toLowerCase();
+                        return postTitle.includes(searchInput.toLowerCase()) || postContent.includes(searchInput.toLowerCase());
+                  });
+            };
+
+            useEffect(() => {
+                  let filtered = filterPosts(post);
+                  if(searchInput !== '') {
+                        filtered = searchPost(filtered);
+                  }
+                  setFilteredPosts(filtered);
+            }, [flair, searchInput, post]);
+
+            const handleSearch = (e) => {
+                  const searchTerm = e.target.value;
+                  setSearchInput(searchTerm);
+            };
+      
+
       useEffect(() => {
-            const fetchPosts = async () => {
+            const fetchPost = async () => {
                   const { data, error } = await supabase
                         .from('posts')
                         .select('*', { count: 'exact' })
@@ -33,11 +53,11 @@ const ReadPosts = ( {token}) => {
                         if (error) {
                               console.log(error);
                             } else {
-                              setPosts(data);
+                              setPost(data);
                             }
                 };
                 
-            fetchPosts().catch(console.error);
+            fetchPost().catch(console.error);
           }, [order]);
 
           const updateUpvote = async (postId) => {
@@ -49,21 +69,23 @@ const ReadPosts = ( {token}) => {
 
             if(error) console.log('error updating upvote:', error)
             else {
-                  const updatedPost = posts.find((post) => post.id === postId);
+                  const updatedPost = post.find((post) => post.id === postId);
                   updatedPost.upvotes = (updatedPost.upvotes || 0) + 1;
                   setUpvotes({ ...upvotes, [postId]: updatedPost.upvotes });
-                  setPosts([...posts]);
+                  setPost([...post]);
             }
 
         }
-   
+
+          
+
       return (
-            <div className='read-posts-div'>
+            <div className='read-post-div'>
                       <h3>Welcome, {token.user.user_metadata.full_name.split(' ')[0]}</h3>
 
                         <div className='search-container search-bar'>
                         <input type="text" placeholder="Search..." 
-                        onChange={(e) => setSearchInput(e.target.value)} />
+                        onChange={handleSearch} />
                         
                         </div>
 
@@ -71,64 +93,38 @@ const ReadPosts = ( {token}) => {
                         <p> Order by: </p> 
                               <button onClick={() => setOrder('newest')} disabled={order === 'newest'}>Newest</button>
                               <button onClick={() => setOrder('oldest')} disabled={order === 'oldest'}>Oldest</button>
-                       
                         </div>
 
-                        {searchInput.length > 0 ? 
+                        <div className='filter-container'>
+                        <p>Flair by:</p>
+                            <button onClick={() => setFlair('')} disabled={flair === ''}>All</button>
+                            <button onClick={() => setFlair('question')} disabled={flair === 'question'}>Questions</button>
+                        <button onClick={() => setFlair('opinion')} disabled={flair === 'opinion'}>Opinions</button>
+                        </div>
 
-                               <div className='posts-container'>
-                                    {searchPosts(searchInput).map((post) => (
-                                          <div className='post' key={post.id}>
-                                                <p>{new Date(post.created_at).toLocaleString()}</p>
-                                                <Link to={`/post/${post.id}`}><h3>{post.title}</h3></Link>
-                                                <p>{post.content.length > 100 ? post.content.substring(0, 100) + '...' : post.content} </p>
+                        {filteredPosts.map((post) => (
+                              <div className='post' key={post.id}>
+                                    <div className={`flair flair-${post.flair.toLowerCase()}`}>{post.flair}</div>
+                                    <p>{new Date(post.created_at).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}</p>
+                                    <Link to={`/post/${post.id}`}><h3>{post.title}</h3></Link>
+                                    <p>{post.content.length > 100 ? post.content.substring(0, 100) + '...' : post.content} </p>
 
-                                                <div className='buttonDiv'>
-                                                      {post.user_id === token.user.id ? (
-                                                            <button className='upvotesBtn' disabled>
-                                                                  {post.upvotes || 0} △
-                                                            </button>
-                                                      ) : (
-                                                            <button className='upvotesBtn' onClick={() => updateUpvote(post.id)}>{post.upvotes} ▲</button>
-                                                      )}
+                                    <div className='buttonDiv'>
+                                          {post.user_id === token.user.id ? (
+                                                <button className='upvotesBtn' disabled> {post.upvotes || 0} △</button>
+                                          ) : (
+                                                <button className='upvotesBtn' onClick={() => updateUpvote(post.id)}>{post.upvotes} ▲</button>
+                                          )}
 
-                                                {post.user_id === token.user.id &&
-                                                <Link to={`/edit/${post.id}`}><button className='editBtn'>Edit</button> </Link>}
-                                                </div>
-                                          </div>
-                                    ))}
-                              </div>
-                        :
-                        <div className='posts-container'>
-                              {posts.map((post) => (
-                                    <div className='post' key={post.id}>
-                                          <p>{new Date(post.created_at).toLocaleString()}</p>
-                                          <Link to={`/post/${post.id}`}><h3>{post.title}</h3></Link>
-                                                <p>{post.content.length > 100 ? post.content.substring(0, 100) + '...' :post.content}</p>
-
-                                          <div className='buttonDiv'>
-                                                {post.user_id === token.user.id ? (
-                                                      <button className='upvotesBtn' disabled>
-                                                            {post.upvotes || 0} △
-                                                      </button>
-                                                ) : (
-                                                      <button className='upvotesBtn' onClick={() => updateUpvote(post.id)}>{post.upvotes} ▲</button>
-                                                )}
-
-                                          {post.user_id === token.user.id &&
+                                    {post.user_id === token.user.id &&
                                           <Link to={`/edit/${post.id}`}><button className='editBtn'>Edit</button> </Link>}
-                                          </div>
                                     </div>
-                              ))}
-                        </div>
-
-                                    
-                        }
-
-
+                              </div>
+                        ))}
             </div>
-      )
-      }
+      )}
 
+
+    
 export default ReadPosts;
 
