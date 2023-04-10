@@ -29,7 +29,8 @@ const EditPost = () => {
             .from('posts')
             .update({ 
                   title: post.title,
-                  content: post.content
+                  content: post.content,
+                  flair: post.flair
                    })
             .eq('id', id)
 
@@ -55,6 +56,14 @@ const EditPost = () => {
             <div className="edit-post">
             <h2>Edit Post</h2>
             <form onSubmit={updatePost}>
+
+            <div className="flair">
+            <input type="radio" id="opinion" name="flair" value="opinion" checked={post.flair === 'opinion'} onChange={(e) => setPost({...post, flair: e.target.value})} />
+            <label htmlFor="opinion">opinion</label>
+            <input type="radio" id="question" name="flair" value="question" checked={post.flair === 'question'} onChange={(e) => setPost({...post, flair: e.target.value})} />
+            <label htmlFor="question">question</label>
+            </div>
+
               <label htmlFor="title">Title:</label>
               <input type="text" id="title" name="title" value={post.title} onChange={(e) => setPost({...post, title: e.target.value})} />
       
