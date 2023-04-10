@@ -1,6 +1,6 @@
 import React from 'react';
-import { supabase } from '../client';
-import './styles/CreatePost.css'
+import { supabase } from '../../client';
+import '../styles/CreatePost.css';
 
 const CreatePost = () => {
 
