@@ -14,6 +14,7 @@
 * Uitlized lab 6 to be able to post title and content
 
 5. Flag System
+* Struggled with filtering by question and opinion, utilized chatgpt and ended up being able to get more concise code that does multiple filtering
 
 6. Comment System
 

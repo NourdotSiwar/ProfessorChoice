@@ -1,14 +1,15 @@
 
-.read-posts-div{
+.read-post-div{
     display: flex;
     flex-direction: column;
     margin-top: 50px;
 }
-.posts-container {
+.post-container {
       display: flex;
       flex-wrap: wrap;
       gap: 0.5rem;
-      justify-content: space-evenly;
+      justify-content: center;
+
     }
     
     .post {
@@ -18,9 +19,15 @@
       box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
       margin-bottom: 2rem;
       width: 20rem;
-      margin: 40px;
+      margin-top: 40px;
+      margin-left: 10px;
+      margin-right: 10px;
+      margin-bottom: 0px;
     }
     
+    .contentDiv{
+      height: 5rem;
+    }
     .post h3 {
       font-size: 1.5rem;
       margin-bottom: 0.5rem;
@@ -65,7 +72,7 @@
       cursor: not-allowed;
       color: teal;
     }
-    
+
     .upvotesBtn, .editBtn {
       background-color: teal;
       color: white;
@@ -76,7 +83,7 @@
       border-radius: 5px;
       margin: 5px;
     }
-
+    
     .upvotesBtn{
       width: 100px;
     }
@@ -112,6 +119,17 @@
       color: #333;
     }
 
+    .clearBtn {
+      background-color: teal;
+      color: white;
+      border: none;
+      padding: 10px;
+      font-size: 16px;
+      cursor: pointer;
+      border-radius: 20px;
+      margin: 5px;
+    }
+
     .flair {
       padding: 8px;
       border-radius: 4px;
@@ -130,3 +148,4 @@
   .flair-opinion {
     background-color: #77DD76
   }
+

@@ -79,14 +79,19 @@ const ReadPosts = ( {token}) => {
 
           
 
+      const clearFilter = () => {
+            setSearchInput('')
+            document.querySelectorAll('input[type=text]').forEach((el) => el.value = '');
+      }
+
       return (
             <div className='read-post-div'>
                       <h3>Welcome, {token.user.user_metadata.full_name.split(' ')[0]}</h3>
 
                         <div className='search-container search-bar'>
                         <input type="text" placeholder="Search..." 
-                        onChange={handleSearch} />
-                        
+                        onChange={handleSearch} />     
+                        <button className='clearBtn' onClick={clearFilter}>Clear</button>
                         </div>
 
                         <div className='order-by-container'>
@@ -102,12 +107,14 @@ const ReadPosts = ( {token}) => {
                         <button onClick={() => setFlair('opinion')} disabled={flair === 'opinion'}>Opinions</button>
                         </div>
 
+                        <div className='post-container'>
                         {filteredPosts.map((post) => (
                               <div className='post' key={post.id}>
                                     <div className={`flair flair-${post.flair.toLowerCase()}`}>{post.flair}</div>
                                     <p>{new Date(post.created_at).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}</p>
                                     <Link to={`/post/${post.id}`}><h3>{post.title}</h3></Link>
-                                    <p>{post.content.length > 100 ? post.content.substring(0, 100) + '...' : post.content} </p>
+                                    <div className='contentDiv'>
+                                    <p>{post.content.length > 100 ? post.content.substring(0, 100) + '...' : post.content} </p></div>
 
                                     <div className='buttonDiv'>
                                           {post.user_id === token.user.id ? (
@@ -120,7 +127,9 @@ const ReadPosts = ( {token}) => {
                                           <Link to={`/edit/${post.id}`}><button className='editBtn'>Edit</button> </Link>}
                                     </div>
                               </div>
+
                         ))}
+            </div>
             </div>
       )}
 
