@@ -38,6 +38,7 @@ const DetailedPost = ( {token}) => {
                         <button className='upvotesBtn' onClick={() => updateUpvote(post.id)}>{post.upvotes} ▲</button>
                   )}
                   {post.user_id === token.user.id ? <Link to={`/edit/${post.id}`}><button className='editBtn'>Edit</button> </Link> : null}
+
                   </div>
             </div>
       

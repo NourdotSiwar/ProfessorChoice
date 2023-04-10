@@ -26,7 +26,7 @@
     }
     
     .contentDiv{
-      height: 5rem;
+      height: 3.5rem;
     }
     .post h3 {
       font-size: 1.5rem;
@@ -130,6 +130,10 @@
       margin: 5px;
     }
 
+    .clearBtn:hover {
+      background-color: #e6e6e6;
+      color: #333;
+    }
     .flair {
       padding: 8px;
       border-radius: 4px;

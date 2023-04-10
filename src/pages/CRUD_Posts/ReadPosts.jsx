@@ -1,6 +1,6 @@
 import React, { useState, useEffect} from 'react';
-import { supabase } from '../client';
-import './styles/ReadPosts.css';
+import { supabase } from '../../client';
+import '../styles/ReadPosts.css';
 import { Link } from 'react-router-dom';
 
 const ReadPosts = ( {token}) => {
@@ -95,15 +95,14 @@ const ReadPosts = ( {token}) => {
                         </div>
 
                         <div className='order-by-container'>
-                        <p> Order by: </p> 
+                        <p> Filter by: </p> 
                               <button onClick={() => setOrder('newest')} disabled={order === 'newest'}>Newest</button>
                               <button onClick={() => setOrder('oldest')} disabled={order === 'oldest'}>Oldest</button>
                         </div>
 
                         <div className='filter-container'>
-                        <p>Flair by:</p>
-                            <button onClick={() => setFlair('')} disabled={flair === ''}>All</button>
-                            <button onClick={() => setFlair('question')} disabled={flair === 'question'}>Questions</button>
+                        <button onClick={() => setFlair('')} disabled={flair === ''}>All</button>
+                        <button onClick={() => setFlair('question')} disabled={flair === 'question'}>Questions</button>
                         <button onClick={() => setFlair('opinion')} disabled={flair === 'opinion'}>Opinions</button>
                         </div>
 
@@ -114,7 +113,7 @@ const ReadPosts = ( {token}) => {
                                     <p>{new Date(post.created_at).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}</p>
                                     <Link to={`/post/${post.id}`}><h3>{post.title}</h3></Link>
                                     <div className='contentDiv'>
-                                    <p>{post.content.length > 100 ? post.content.substring(0, 100) + '...' : post.content} </p></div>
+                                    <p>{post.content.length > 50 ? post.content.substring(0, 50) + '...' : post.content} </p></div>
 
                                     <div className='buttonDiv'>
                                           {post.user_id === token.user.id ? (

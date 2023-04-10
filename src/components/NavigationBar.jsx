@@ -7,7 +7,7 @@ const NavigationBar = () => {
   return (
     <nav>
       <div className='title-container'>
-        <a className='title' href="/">ProfessorChoice</a>
+        <a className='title' href="/dashboard">ProfessorChoice</a>
       </div>
       <div className='menu-container'>
         <ul className='menu'>
