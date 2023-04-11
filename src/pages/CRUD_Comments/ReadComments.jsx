@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { supabase } from '../../client';
 import '../styles/ReadComments.css'
 import { Link } from 'react-router-dom';
+import moment from 'moment';
 
 const ReadComments = ({ token, postId }) => {
 
@@ -32,7 +33,7 @@ const ReadComments = ({ token, postId }) => {
               <div className='comment' key={comment.comment_id}>
                 <div className='comment-header'>
                   <div className='comment-info'>
-                  <p>{new Date(comment.created_at).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}, {new Date(comment.created_at).toLocaleTimeString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true })}</p>
+                  <p>{moment(comment.created_at).fromNow()}</p>
                      
                     <div className='comment-actions'>
                      { comment.user_id === token.user.id && 

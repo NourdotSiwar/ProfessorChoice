@@ -3,6 +3,7 @@ import { supabase } from '../../client';
 import '../styles/ReadPosts.css';
 import { Link } from 'react-router-dom';
 import moment from 'moment';
+import Loading from '../../components/Loading';
 
 const ReadPosts = ({token}) => {
 
@@ -12,6 +13,7 @@ const ReadPosts = ({token}) => {
       const [searchInput, setSearchInput] = useState('')
       const [flair, setFlair] = useState('')
       const [filteredPosts, setFilteredPosts] = useState([])
+      const [loading, setLoading] = useState(false);
 
             const filterPosts = (posts) => {
                   return posts.filter((post) => {
@@ -46,16 +48,20 @@ const ReadPosts = ({token}) => {
 
       useEffect(() => {
             const fetchPost = async () => {
+                  setLoading(true);
+                  setTimeout(async () => {
                   const { data, error } = await supabase
                         .from('posts')
                         .select('*', { count: 'exact' })
                         .order('created_at', { ascending: order === 'oldest' })
-                  
+                        setLoading(false);
+
                         if (error) {
                               console.log(error);
                             } else {
                               setPost(data);
                             }
+                  }, 500);
                 };
                 
             fetchPost().catch(console.error);
@@ -87,6 +93,7 @@ const ReadPosts = ({token}) => {
 
       return (
             <div className='read-post-div'>
+
                       <h3>Welcome, {token.user.user_metadata.full_name.split(' ')[0]}</h3>
 
                         <div className='search-container search-bar'>
@@ -106,8 +113,11 @@ const ReadPosts = ({token}) => {
                         <button onClick={() => setFlair('question')} disabled={flair === 'question'}>Questions</button>
                         <button onClick={() => setFlair('opinion')} disabled={flair === 'opinion'}>Opinions</button>
                         </div>
-
+                        {loading && <Loading />}
+                        {!loading && (
+                              <>
                         <div className='post-container'>
+
                         {filteredPosts.map((post) => (
                               <div className='post' key={post.id}>
                                     <div className={`flair flair-${post.flair.toLowerCase()}`}>{post.flair}</div>
@@ -130,6 +140,8 @@ const ReadPosts = ({token}) => {
 
                         ))}
             </div>
+            </>
+            )}
             </div>
       )}
 
