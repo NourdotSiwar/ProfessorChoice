@@ -3,7 +3,34 @@
       padding: 1rem;
       border-radius: 0.5rem;
       box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-      margin-bottom: 2rem;
-      width: 50rem;
-      margin: 0 auto;
+      margin-top: 5rem;
+      width: 50rem; 
     }
+
+    .commentDiv {
+      margin-top: 20px;
+      background-color: #fff;
+      padding: 1rem;
+      border-radius: 0.5rem;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+      margin-bottom: 0.5rem;
+      text-align: left;
+    }
+
+    .create-comment input[type="text"] {
+      width: 87%;
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      margin-right: 10px;
+    }
+    
+    .create-comment input[type="submit"] {
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      padding: 10px;
+      cursor: pointer;
+    }
+    

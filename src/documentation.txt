@@ -17,5 +17,8 @@
 * Struggled with filtering by question and opinion, utilized chatgpt and ended up being able to get more concise code that does multiple filtering
 
 6. Comment System
-
+* Struggled with figuring out how to start the comment system, utilized CRUD operations like I did with posts.
+* Struggled with linking comments and posts id's, utilized chatgpt and my understanding of code to debug
+* Struggled with passing parameters, opted to go through each line and redefined variable
+ 
 
