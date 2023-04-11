@@ -5,6 +5,7 @@ import './styles/DetailedPost.css';
 import ReadComments from './CRUD_Comments/ReadComments';
 import CreateComment from './CRUD_Comments/CreateComment';
 import moment from 'moment';
+import Loading from '../components/Loading';
 
 const DetailedPost = ( {token}) => {
 
@@ -12,19 +13,24 @@ const DetailedPost = ( {token}) => {
       const [post, setPost] = useState([]);
       const postId = params.id;
       const [upvotes, setUpvotes] = useState({});
+      const [loading, setLoading] = useState(false);
 
       useEffect(() => {
             const fetchPost = async () => {
+                  setLoading(true);
+                  setTimeout(async () => {
                   const { data, error } = await supabase
                   .from('posts')
                   .select('*')
                   .eq('id', postId)
                   .maybeSingle();
                   setPost(data);
+                  setLoading(false);
 
                   if (error) {
                         console.log('Error fetching post:', error);
                   }
+            }, 0);
             }
 
             fetchPost().catch(console.error);
@@ -47,15 +53,18 @@ const DetailedPost = ( {token}) => {
 
                   setPost(data);
                   setUpvotes({ ...upvotes, [postId]: data.upvotes });
+
             }
 
         }
 
       return (
       
-            <div className="detailed-post">
-                  {post.title ? (
+            <div>
+                  {loading && <Loading />}
+                  {!loading && post.title && (
                         <>
+                  <div className='detailed-post'>
                   <h1>{post.title}</h1>
                   <p>{post.content}</p>
                   <p>{moment(post.created_at).fromNow()}</p>
@@ -75,12 +84,11 @@ const DetailedPost = ( {token}) => {
                               <CreateComment token={token} postId={postId} />
                               </div>     
                   </div>
+                  </div>
                   </>
-                  ) : (
-                        <h1>Loading...</h1>
                   )}
-
             </div>
+            
       );
       };
       
