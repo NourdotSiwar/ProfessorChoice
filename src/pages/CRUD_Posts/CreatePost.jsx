@@ -6,7 +6,6 @@ const CreatePost = () => {
 
     const [title, setTitle] = React.useState('');
     const [content, setContent] = React.useState('');
-    const [flag, setFlag] = React.useState(false);
     const [user, setUser] = React.useState(null);
 
 

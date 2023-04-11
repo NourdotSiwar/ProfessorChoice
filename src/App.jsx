@@ -9,13 +9,16 @@ import Login from './pages/Login'
 import SignUp from './pages/SignUp'
 import NavigationBar from './components/NavigationBar'
 import DetailedPost from './pages/DetailedPost'
+import ReadComments from './pages/CRUD_Comments/ReadComments'
+import EditComment from './pages/CRUD_Comments/EditComment'
+import CreateComment from './pages/CRUD_Comments/CreateComment'
 
 
 function App() {
   const [token, setToken] = useState(false);
-  const [user, setUser] = useState(false);
+  const [user, setUser] = useState(null);
 
-// passing user id to create post
+
   useEffect(() => {
     if(sessionStorage.getItem('token')){
       let data = JSON.parse(sessionStorage.getItem('token'));
@@ -57,18 +60,34 @@ function App() {
       : <Login setToken={setToken}/>
     },
     {
-    path: '/login',
+    path: '/',
     element: <Login setToken={setToken}/>
     },
     {
-    path: '/',
+    path: '/signup',
     element: <SignUp />
     },
     {
     path: '/post/:id',
     element: <DetailedPost token={token}/>
-    }
+    },
+    {
+    path: '/post/:id',
+    element: <ReadComments token={token}
+    postId={user?.id} />
+    },
+    {
+    path: '/editComment/:id',
+    element: <EditComment postId={user?.id} />
+    },
+    {
+    path: '/post/:id',
+    element: <CreateComment token={token}
+    postId={user?.id}/>
+    },
     ]);
+
+
 
   return (
     <div className="App">

@@ -70,7 +70,7 @@ const Login = ({setToken}) => {
 
                   {passwordIncorrect && <p className='login-error'>Incorrect email or password</p>}
             </form>
-            Don't have an account? <Link to='/'>Sign Up</Link>
+            Don't have an account? <Link to='/signup'>Sign Up</Link>
            
             
       </div>

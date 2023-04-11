@@ -2,8 +2,9 @@ import React, { useState, useEffect} from 'react';
 import { supabase } from '../../client';
 import '../styles/ReadPosts.css';
 import { Link } from 'react-router-dom';
+import moment from 'moment';
 
-const ReadPosts = ( {token}) => {
+const ReadPosts = ({token}) => {
 
       const [post, setPost] = useState([]);
       const [order, setOrder] = useState('newest');
@@ -110,7 +111,7 @@ const ReadPosts = ( {token}) => {
                         {filteredPosts.map((post) => (
                               <div className='post' key={post.id}>
                                     <div className={`flair flair-${post.flair.toLowerCase()}`}>{post.flair}</div>
-                                    <p>{new Date(post.created_at).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}</p>
+                                    <p>{moment(post.created_at).fromNow()}</p>
                                     <Link to={`/post/${post.id}`}><h3>{post.title}</h3></Link>
                                     <div className='contentDiv'>
                                     <p>{post.content.length > 50 ? post.content.substring(0, 50) + '...' : post.content} </p></div>

@@ -45,7 +45,8 @@ const EditPost = () => {
             .delete()
             .eq('id', id)
 
-             window.location.href = '/dashboard';
+            
+            window.location.href = '/dashboard';
       }
 
       if (!post) {
