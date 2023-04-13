@@ -36,7 +36,13 @@ fix the following files:
 3. EditComments
 
 * SignUp/Login - DONE
-* Account
-* Loading? - DONE
+* Account - DONE
+* Loading - DONE
 * NavBar - DONE
+
+8. CreatePost form 
+credits for word counter: https://codepen.io/geoffbuell/pen/mdREpwM
+dropdown icons: https://react-icons.github.io/react-icons/search?q=arrow
+
+
 
