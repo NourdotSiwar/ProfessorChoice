@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { supabase } from '../../client';
+import { supabase } from '../client';
 import { useParams } from 'react-router-dom';
-import '../styles/EditPost.css'
+import './styles/EditPost.css';
 
 const EditPost = () => {
 
@@ -10,7 +10,7 @@ const EditPost = () => {
 
       useEffect(() => {
             const fetchPost = async () => {
-                  const { data, error } = await supabase
+                  const { data } = await supabase
                   .from('posts')
                   .select()
                   .eq('id', id)
@@ -63,6 +63,7 @@ const EditPost = () => {
             <label htmlFor="opinion">opinion</label>
             <input type="radio" id="question" name="flair" value="question" checked={post.flair === 'question'} onChange={(e) => setPost({...post, flair: e.target.value})} />
             <label htmlFor="question">question</label>
+
             </div>
 
               <label htmlFor="title">Title:</label>

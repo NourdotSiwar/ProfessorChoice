@@ -2,10 +2,10 @@ import React, { useState, useEffect} from 'react';
 import { useParams } from 'react-router-dom';
 import {supabase} from '../client';
 import './styles/DetailedPost.css';
-import ReadComments from './CRUD_Comments/ReadComments';
-import CreateComment from './CRUD_Comments/CreateComment';
-import moment from 'moment';
+import ReadComments from './ReadComments';
+import CreateComment from './CreateComment';
 import Loading from '../components/Loading';
+import moment from 'moment';
 
 const DetailedPost = ( {token}) => {
 

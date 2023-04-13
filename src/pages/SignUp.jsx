@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { supabase } from '../client'
 import { Link } from 'react-router-dom';
-import "./styles/SignUp.css"
+import styles from './styles/SignUpLogIn.module.css';
 
 const SignUp = () => {
 
@@ -27,7 +27,7 @@ const SignUp = () => {
             e.preventDefault();
 
             try {
-                  const { data, error } = await supabase.auth.signUp(
+                  const { error } = await supabase.auth.signUp(
                     {
                       email: formData.email,
                       password: formData.password,
@@ -48,22 +48,22 @@ const SignUp = () => {
   
 
   return (
-    <div className="login-container">
-    <h1 className="login-heading">Sign Up</h1>
+    <div className={styles.container}>
+    <h1 className={styles.heading}>Sign Up</h1>
             <form onSubmit={handleSubmit}>
 
                   <input 
                   placeholder='full name'
                   name='fullName'
                   onChange={handleChange}
-                  className='login-input'
+                  className={styles.input}
                   />
 
                   <input 
                   placeholder='email'
                   name='email'
                   onChange={handleChange}
-                  className='login-input'
+                  className={styles.input}
                   />
 
                   <input
@@ -71,10 +71,10 @@ const SignUp = () => {
                   name='password'
                   onChange={handleChange}
                   type='password'
-                  className='login-input'
+                  className={styles.input}
                   />
 
-                  <button className='login-button' type='submit'>Sign Up</button>
+                  <button className={styles.button} type='submit'>Sign Up</button>
             </form>
             Already have an account? <Link to='/'>Login</Link>
       </div>

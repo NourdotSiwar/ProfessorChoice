@@ -1,5 +1,4 @@
-/* Login form container */
-.login-container {
+.container {
   background-color: #f9f9f9;
   padding: 20px;
   border-radius: 10px;
@@ -8,8 +7,7 @@
   margin: 50px auto;
 }
 
-/* Login form heading */
-.login-heading {
+.heading {
   text-align: center;
   margin-bottom: 20px;
   font-size: 24px;
@@ -17,8 +15,7 @@
   color: #333;
 }
 
-/* Form input fields */
-.login-input {
+.input {
   width: 90%;
   padding: 10px;
   margin-bottom: 20px;
@@ -28,25 +25,22 @@
   font-size: 16px;
 }
 
-/* Form submit button */
-.login-button {
+.button {
   background-color: #333;
   color: #fff;
   border: none;
   border-radius: 5px;
-  padding: 10px 20px;
+  padding: 50px 20px;
   font-size: 16px;
   cursor: pointer;
   margin-bottom: 10px;
 }
 
-/* Form submit button hover effect */
-.login-button:hover {
+.button:hover {
   background-color: #555;
 }
 
-/* Error message */
-.login-error {
+.error {
   color: red;
   margin-top: 10px;
 }

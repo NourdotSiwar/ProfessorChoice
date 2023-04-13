@@ -1,16 +1,16 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
-import './styles/NavigationBar.css'
+import styles from './styles/NavigationBar.module.css';
 
 const NavigationBar = () => {
 
   return (
     <nav>
-      <div className='title-container'>
-        <a className='title' href="/dashboard">ProfessorChoice</a>
+      <div>
+        <a className={styles.title} href="/dashboard">ProfessorChoice</a>
       </div>
-      <div className='menu-container'>
-        <ul className='menu'>
+      <div>
+        <ul >
           <li>
             <Link style={{color: 'white', textDecoration: "none"}} to="/dashboard">Dashboard</Link>
           </li>

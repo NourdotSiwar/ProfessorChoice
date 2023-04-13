@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { supabase } from '../client'
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
-import "./styles/Login.css"
+import styles from './styles/SignUpLogIn.module.css';
 
 const Login = ({setToken}) => {
 
@@ -48,14 +48,14 @@ const Login = ({setToken}) => {
   
 
   return (
-      <div className="login-container">
-      <h1 className="login-heading">Login</h1>
+      <div className={styles.container}>
+      <h1 className={styles.heading}>Login</h1>
             <form onSubmit={handleSubmit}>
                   <input 
                   placeholder='email'
                   name='email'
                   onChange={handleChange}
-                  className='login-input'
+                  className={styles.input}
                   />
 
                   <input
@@ -63,12 +63,12 @@ const Login = ({setToken}) => {
                   name='password'
                   onChange={handleChange}
                   type='password'
-                  className='login-input'
+                  className={styles.input}
                   />
 
-                  <button className='login-button' type='submit'>Login</button>
-
-                  {passwordIncorrect && <p className='login-error'>Incorrect email or password</p>}
+                  {passwordIncorrect && <p className={styles.error}>Incorrect email or password</p>}
+                  <button className={styles.button} type='submit'>Login</button>
+                  
             </form>
             Don't have an account? <Link to='/signup'>Sign Up</Link>
            
