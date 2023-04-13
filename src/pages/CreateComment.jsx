@@ -1,5 +1,6 @@
 import React, { useEffect, useState} from 'react';
-import {supabase} from '../../client';
+import {supabase} from '../client';
+import './styles/CreateComment.css';
 
 
 const CreateComment = ({postId}) => {

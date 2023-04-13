@@ -1,6 +1,6 @@
 import React from 'react';
-import { supabase } from '../../client';
-import '../styles/CreatePost.css';
+import { supabase } from '../client';
+import styles from './styles/CreatePost.module.css';
 
 const CreatePost = () => {
 
@@ -28,7 +28,7 @@ const CreatePost = () => {
 
         const flair = document.querySelector('input[name="flair"]:checked').value;
 
-        const { data: user_data,  error: user_error } = await supabase
+         await supabase
         .from('Users')
         .select('id')
         .eq('email', user.email)
@@ -54,13 +54,11 @@ const CreatePost = () => {
     }
         
 
-
     return (
-        <div className='create-post-container'>
-            <h2>Create a Post</h2>
+        <div>
             <form>
 
-            <div className='flag'>
+            <div className={styles.flag}>
                 <input type="radio" id="opinion" name="flair" value="opinion" />
                 <label htmlFor="opinion">opinion</label>
                 <input type="radio" id="question" name="flair" value="question"/>

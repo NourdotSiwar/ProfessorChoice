@@ -1,9 +1,9 @@
 import React, { useState, useEffect} from 'react';
-import { supabase } from '../../client';
-import '../styles/ReadPosts.css';
+import { supabase } from '../client';
+import styles from './styles/ReadPosts.module.css';
 import { Link } from 'react-router-dom';
 import moment from 'moment';
-import Loading from '../../components/Loading';
+import Loading from '../components/Loading';
 
 const ReadPosts = ({token}) => {
 
@@ -15,8 +15,8 @@ const ReadPosts = ({token}) => {
       const [filteredPosts, setFilteredPosts] = useState([])
       const [loading, setLoading] = useState(false);
 
-            const filterPosts = (posts) => {
-                  return posts.filter((post) => {
+            const filterPosts = () => {
+                  return post.filter((post) => {
                         const postFlair = post.flair.toLowerCase();
                         const postTitle = post.title.toLowerCase();
                         const postContent = post.content.toLowerCase();
@@ -24,7 +24,7 @@ const ReadPosts = ({token}) => {
                   });
             };
 
-            const searchPost = (posts) => {
+            const searchPost = () => {
                   return post.filter((post) => {
                         const postTitle = post.title.toLowerCase();
                         const postContent = post.content.toLowerCase();
@@ -92,60 +92,60 @@ const ReadPosts = ({token}) => {
       }
 
       return (
-            <div className='read-post-div'>
+            <div className={styles['posts-section']}>
 
-                      <h3>Welcome, {token.user.user_metadata.full_name.split(' ')[0]}</h3>
+                      <h3 className={styles['welcome-message']}>Welcome, {token.user.user_metadata.full_name.split(' ')[0]}</h3>
 
-                        <div className='search-container search-bar'>
-                        <input type="text" placeholder="Search..." 
-                        onChange={handleSearch} />     
-                        <button className='clearBtn' onClick={clearFilter}>Clear</button>
+                        <div className={styles['search-bar']}>
+                        <input type="text" placeholder="Search..." onChange={handleSearch} />     
+                        <button className={styles['clear-btn']} onClick={clearFilter}>Clear</button>
                         </div>
 
-                        <div className='order-by-container'>
+                        <div className={styles['order-by-container']}>
                         <p> Filter by: </p> 
                               <button onClick={() => setOrder('newest')} disabled={order === 'newest'}>Newest</button>
                               <button onClick={() => setOrder('oldest')} disabled={order === 'oldest'}>Oldest</button>
                         </div>
 
-                        <div className='filter-container'>
+                        <div className={styles['filter-container']}>
                         <button onClick={() => setFlair('')} disabled={flair === ''}>All</button>
                         <button onClick={() => setFlair('question')} disabled={flair === 'question'}>Questions</button>
                         <button onClick={() => setFlair('opinion')} disabled={flair === 'opinion'}>Opinions</button>
                         </div>
+
                         {loading && <Loading />}
                         {!loading && (
-                              <>
-                        <div className='post-container'>
-
+                        <div className={styles['post-container']}>
+                        
                         {filteredPosts.map((post) => (
-                              <div className='post' key={post.id}>
-                                    <div className={`flair flair-${post.flair.toLowerCase()}`}>{post.flair}</div>
+                               <div className={styles['post']} key={post.id}>
+                                    
+                                    <Link style={{color:'teal', textDecoration: 'none'}} to={`/post/${post.id}`}><div>
+                                    <div className={`${styles.flair} ${styles[`flair-${post.flair.toLowerCase()}`]}`}>{post.flair}</div>
                                     <p>{moment(post.created_at).fromNow()}</p>
-                                    <Link to={`/post/${post.id}`}><h3>{post.title}</h3></Link>
-                                    <div className='contentDiv'>
-                                    <p>{post.content.length > 50 ? post.content.substring(0, 50) + '...' : post.content} </p></div>
+                                    <h3>{post.title}</h3>
+                                    <div>
+                                    <p>{post.content.length > 50 ? post.content.substring(0, 50) + '...' : post.content} <Link className={styles['read-more']} style={{color:'black'}} to={`/post/${post.id}`}>More
+                                    </Link></p></div>
+                                    </div></Link>
 
-                                    <div className='buttonDiv'>
+                                    <div className={styles['button-container']}>
                                           {post.user_id === token.user.id ? (
-                                                <button className='upvotesBtn' disabled> {post.upvotes || 0} △</button>
+                                                <button className={styles['upvotes-btn']} disabled> {post.upvotes || 0} △</button>
                                           ) : (
-                                                <button className='upvotesBtn' onClick={() => updateUpvote(post.id)}>{post.upvotes} ▲</button>
+                                                <button className={styles['upvotes-btn']} onClick={() => updateUpvote(post.id)}>{post.upvotes} ▲</button>
                                           )}
 
                                     {post.user_id === token.user.id &&
-                                          <Link to={`/edit/${post.id}`}><button className='editBtn'>Edit</button> </Link>}
+                                          <Link to={`/edit/${post.id}`}><button className={styles['edit-btn']}>Edit</button> </Link>}
                                     </div>
                               </div>
-
                         ))}
             </div>
-            </>
             )}
             </div>
       )}
 
 
-    
 export default ReadPosts;
 

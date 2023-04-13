@@ -21,4 +21,22 @@
 * Struggled with linking comments and posts id's, utilized chatgpt and my understanding of code to debug
 * Struggled with passing parameters, opted to go through each line and redefined variable
  
+7. Naming convention 
+* Struggled with naming divs and css elements, used this https://www.freecodecamp.org/news/css-naming-conventions-that-will-save-you-hours-of-debugging-35cea737d849/ 
+fix the following files:
+* CRUD posts
+1. ReadPosts - DONE
+2. CreatePost
+3. EditPost
+4. DetailedPost
+
+* CRUD comments
+1. ReadComments
+2. CreateComments
+3. EditComments
+
+* SignUp/Login - DONE
+* Account
+* Loading? - DONE
+* NavBar - DONE
 
