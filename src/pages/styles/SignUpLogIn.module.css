@@ -25,18 +25,18 @@
   font-size: 16px;
 }
 
-.button {
-  background-color: #333;
+.loginBtn, .signupBtn {
+  background-color: teal;
   color: #fff;
   border: none;
   border-radius: 5px;
-  padding: 50px 20px;
+  padding: 10px 20px;
   font-size: 16px;
   cursor: pointer;
   margin-bottom: 10px;
 }
 
-.button:hover {
+.loginBtn:hover, .signupBtn {
   background-color: #555;
 }
 

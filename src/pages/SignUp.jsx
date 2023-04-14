@@ -74,7 +74,7 @@ const SignUp = () => {
                   className={styles.input}
                   />
 
-                  <button className={styles.button} type='submit'>Sign Up</button>
+                  <button className={styles.signupBtn} type='submit'>Sign Up</button>
             </form>
             Already have an account? <Link to='/'>Login</Link>
       </div>

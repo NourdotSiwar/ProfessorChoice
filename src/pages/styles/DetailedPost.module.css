@@ -1,0 +1,86 @@
+.postContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin-top: 5rem;
+}
+
+.detailedPost {
+  width: 600px;
+  margin: 0 auto;
+  height: auto;
+  padding: 20px;
+  border: 1px solid teal;
+  background-color: #f5f5f5;
+  box-shadow: 0 0 10px 0 rgba(0,0,0,0.2);
+  border-radius: 10px;
+}
+
+.postHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.postTime {
+  margin: 0;
+  font-size: 1rem;
+  color: teal;
+  font-weight: bold;
+}
+
+.flair{
+  color: white;
+  background-color: #f5f5f5;
+  border: none;
+  border-radius: 5px;
+  padding: 5px;
+  font-size: 1.1rem;
+  box-shadow: 0 0 10px 0 rgba(0,0,0,0.2);
+}
+
+.questionFlair {
+background-color: #79d1d6 ;
+}
+
+.opinionFlair {
+background-color: #7798ed;
+}  
+
+.editBtn{
+  width: 100px;
+  height: 35px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: teal;
+  font-size: 1rem;
+  cursor: pointer;
+  color: white;
+}
+  
+.editBtn:hover{
+  background-color: #ccc;
+  color: black;
+}
+
+.postTitle {
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
+.postContent {
+  margin-top: 0;
+  margin-bottom: 20px;
+}
+
+.commentList {
+  margin-top: 20px;
+}
+
+.upvoteCommentDiv{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}

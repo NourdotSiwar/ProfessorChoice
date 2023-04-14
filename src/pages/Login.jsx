@@ -67,7 +67,7 @@ const Login = ({setToken}) => {
                   />
 
                   {passwordIncorrect && <p className={styles.error}>Incorrect email or password</p>}
-                  <button className={styles.button} type='submit'>Login</button>
+                  <button className={styles.loginBtn} type='submit'>Login</button>
                   
             </form>
             Don't have an account? <Link to='/signup'>Sign Up</Link>

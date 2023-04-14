@@ -1,11 +1,12 @@
 import React, { useState, useEffect} from 'react';
 import { useParams } from 'react-router-dom';
 import {supabase} from '../client';
-import './styles/DetailedPost.css';
+import styles from './styles/DetailedPost.module.css';
 import ReadComments from './ReadComments';
 import CreateComment from './CreateComment';
 import Loading from '../components/Loading';
 import moment from 'moment';
+import { Link } from 'react-router-dom';
 
 const DetailedPost = ( {token}) => {
 
@@ -60,30 +61,41 @@ const DetailedPost = ( {token}) => {
 
       return (
       
-            <div>
+            <div className={styles.postContainer}>
                   {loading && <Loading />}
                   {!loading && post.title && (
                         <>
-                  <div className='detailed-post'>
-                  <h1>{post.title}</h1>
-                  <p>{post.content}</p>
-                  <p>{moment(post.created_at).fromNow()}</p>
+                  <div className={styles.detailedPost}>
+                  <div className={styles.postHeader}>
+                  <p className={styles.postTime}>{moment(post.created_at).fromNow()}</p>
+                  <p className={`${styles.flair} ${post.flair === 'question' ? styles.questionFlair : styles.opinionFlair}`}>{post.flair}</p>
+                  {post.user_id === token.user.id &&
+                    <Link to={`/edit/${post.id}`}><button className={styles.editBtn}>Edit</button> </Link>}
+                  </div>
+                  <h1  className={styles.postTitle}>{post.title}</h1>
+                  <p className={styles.postContent}>{post.content}</p>
 
-                  <div className='buttonDiv'>
-                  { post.user_id === token.user.id ? (
-                     <button className='upvotesBtn' disabled> {post.upvotes || 0} △</button>
-                                          ) : (
-                    <button className='upvotesBtn' onClick={() => updateUpvote(post.id)}>{post.upvotes} ▲</button>
-                    )}
-
+                  <div className={styles.upvoteCommentDiv}>
+                  {post.user_id === token.user.id ? (
+                  <button className={styles.upvotesBtnSmall} disabled>
+                  {post.upvotes || 0} △
+                  </button>
+                  ) : (
+                  <button
+                  className={styles.upvotesBtnSmall}
+                  onClick={() => updateUpvote(post.id)}
+                  >
+                  {post.upvotes} ▲
+                  </button>
+                  )}
+                  <CreateComment token={token} postId={postId} />
                   </div>
 
-                  <div className='commentDiv' >
-                        <div className='commentList'>
-                              <ReadComments token={token} postId={postId} />
-                              <CreateComment token={token} postId={postId} />
-                              </div>     
+                  <div className={styles.commentList}>
+                  <ReadComments token={token} postId={postId} />
                   </div>
+
+
                   </div>
                   </>
                   )}
