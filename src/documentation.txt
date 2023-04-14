@@ -28,7 +28,7 @@ fix the following files:
 1. ReadPosts - DONE
 2. CreatePost - DONE
 3. EditPost - DONE
-4. DetailedPost
+4. DetailedPost - DONE
 
 * CRUD comments
 1. ReadComments
