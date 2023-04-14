@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { supabase } from '../client';
 import { useParams } from 'react-router-dom';
-import './styles/EditPost.css';
+import styles from './styles/EditPost.module.css';
 
 const EditPost = () => {
 
       const {id} = useParams();
       const [post, setPost] = useState(null);
+      const [charCount, setCharCount] = useState(0);
+      const [errorMessage, setErrorMessage] = useState('');
 
       useEffect(() => {
             const fetchPost = async () => {
@@ -15,12 +17,14 @@ const EditPost = () => {
                   .select()
                   .eq('id', id)
 
-                  if (data.length > 0) {
-                        setPost(data[0]);
-                  }
+                  setPost(data[0]);
             }
             fetchPost().catch(console.error);
       }, [id]);
+
+      useEffect(() => {
+            setCharCount(post?.content?.length || 0);
+          }, [post]);
 
       const updatePost = async (e) => {
             e.preventDefault();
@@ -49,35 +53,67 @@ const EditPost = () => {
             window.location.href = '/dashboard';
       }
 
-      if (!post) {
-            return <div>Loading...</div>
+      const handleContentChange = (event) => {
+      setContent(event.target.value);
+      setCharCount(event.target.value.length);
+      };
+
+      const handleEmptyForm = (event) => {
+      event.preventDefault();
+
+      if (post.title === '' || post.content === '' || 
+      (post.flair === 'question' && post.content.length < 100) ||
+      (post.flair === 'opinion' && post.content.length < 250)) {
+      let message = '';
+      if (post.title === '') {
+      message += 'Professor name required.\n'
       }
+      if (post.content === '') {
+      message += 'Text required.\n'
+      }
+      if(post.flair === 'question' && post.content.length < 100) {
+      message += 'Question must be at least 100 characters.\n';
+      }
+      if (post.flair === 'opinion' && post.content.length < 250) {
+      message += 'Opinion must be at least 250 characters.\n';
+      }
+      setErrorMessage(message);
+      } else {
+      updatePost(event);
+      }
+      };
+
       
       return (
-            <div className="edit-post">
+            <div className={styles.editPostDiv}>
             <h2>Edit Post</h2>
-            <form onSubmit={updatePost}>
+            <form>
 
-            <div className="flair">
-            <input type="radio" id="opinion" name="flair" value="opinion" checked={post.flair === 'opinion'} onChange={(e) => setPost({...post, flair: e.target.value})} />
-            <label htmlFor="opinion">opinion</label>
-            <input type="radio" id="question" name="flair" value="question" checked={post.flair === 'question'} onChange={(e) => setPost({...post, flair: e.target.value})} />
-            <label htmlFor="question">question</label>
+            <div className={styles.flag}>
+                <button className={styles.question} disabled={post?.flair === 'question'}
+                 onClick={() => setPost({...post, flair: 'question'})}>question </button>
+                <button className={styles.opinion} disabled={post?.flair === 'opinion'}
+                    onClick={() => setPost({...post, flair: 'opinion'})}>opinion</button>
+                </div>
 
+            <div> 
+            <input className={styles.title} type='text' value={post?.title || ''} onChange={(e) => setPost({...post, title: e.target.value})}
+            id='title' name="title" placeholder='Professor Name'/>
             </div>
 
-              <label htmlFor="title">Title:</label>
-              <input type="text" id="title" name="title" value={post.title} onChange={(e) => setPost({...post, title: e.target.value})} />
-      
-              <label htmlFor="content">Content:</label>
-              <textarea id="content" type="content" name="content" value={post.content} onChange={(e) => setPost({...post, content: e.target.value})} />
-      
-            <div className='updateDeleteBtns'>
-              <button type="submit">Update Post</button>
-              <button className="deleteBtn" onClick={deletePost}>Delete</button>
-              
-              </div>
+            <textarea className={styles.content} id='content' value={post?.content || ''} onChange={
+                  (e) => setPost({...post, content: e.target.value})} type='text' name="content" placeholder="Text"></textarea>
+            <div style={{textAlign: 'right'}}> Character count: {charCount}</div> 
             </form>
+      
+            <div>
+                {errorMessage && <p className={styles.error}>{
+                    errorMessage.split('\n').map((item, key) => {
+                        return <span className={styles.error} key={key}>{item}<br/></span>
+                    }) }</p>}
+                <button className={styles.updatePost} onClick={handleEmptyForm}>Update</button>
+                <button className={styles.deletePost} onClick={deletePost}>Delete</button>
+            </div>
           </div>
         );
       };

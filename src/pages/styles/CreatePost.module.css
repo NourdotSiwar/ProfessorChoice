@@ -21,8 +21,8 @@ border-radius: 5px;
 }
 
 .flag button:hover {
-background-color: #e6e6e6;
-color:#333;
+      color: teal;
+      background-color: #d3d3d3;
 }
 
 .flag button:disabled {
