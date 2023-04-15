@@ -149,7 +149,7 @@ border-top: 1px solid #ccc;
 padding-top: 10px;
 }
 
-.upvotes-btn, .edit-btn {
+.upvotes-btn, .edit-btn, .comments-btn {
 background-color: teal;
 color: white;
 border: none;
@@ -160,12 +160,11 @@ border-radius: 5px;
 margin: 5px;
 }
 
-.upvotes-btn {
-width: 100px;
+.upvotes-btn, .comments-btn {
+width: 80px;
 }
 
-.upvotes-btn:hover, .edit-btn:hover {
-background-color: #e6e6e6;
+.upvotes-btn:hover, .edit-btn:hover, .comments-btn:hover {
 color: #333;
 }
 

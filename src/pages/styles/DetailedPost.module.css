@@ -48,8 +48,8 @@ background-color: #79d1d6 ;
 background-color: #7798ed;
 }  
 
-.editBtn{
-  width: 100px;
+.editBtn, .bookmarkBtn{
+  width: 50px;
   height: 35px;
   border: 1px solid #ccc;
   border-radius: 5px;
