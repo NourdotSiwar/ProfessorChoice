@@ -11,6 +11,7 @@ import { HiOutlinePencil } from 'react-icons/hi';
 import { BiUpvote } from 'react-icons/bi';
 import { BsBookmark } from 'react-icons/bs';
 import { BsBookmarkFill } from 'react-icons/bs';
+import { MdOutlineArrowBack } from 'react-icons/md';
 
 const DetailedPost = ( {token}) => {
 
@@ -148,14 +149,20 @@ const DetailedPost = ( {token}) => {
                   {!loading && post?.title && (
                         <>
                   <div className={styles.detailedPost}>
+                  <div className={styles.backBtn}
+                  onClick={() => window.history.back()}> <MdOutlineArrowBack/> </div>
                   <div className={styles.postHeader}>
-                  <p className={styles.postTime}>{moment(post.created_at).fromNow()}</p>
-                  <p className={`${styles.flair} ${post.flair === 'question' ? styles.questionFlair : styles.opinionFlair}`}>{post.flair}</p>
+                  <p className={styles.postTime}>Posted {moment(post.created_at).fromNow()}</p>
+                  
+                  <div className={styles.actions}>
                   {post.user_id === token.user.id &&
-                    <Link to={`/edit/${post.id}`}><button className={styles.editBtn}><HiOutlinePencil/></button> </Link>}
+                  <Link to={`/edit/${post.id}`}><button className={styles.editBtn}><HiOutlinePencil/></button> </Link>}
                   <button onClick={() => bookmarkPost(post.id)} className={styles.bookmarkBtn}
                   >{isSaved ? <BsBookmarkFill/> : <BsBookmark/>}</button>
                   </div>
+                  </div>
+
+                  <div className={`${styles.flair} ${post.flair === 'question' ? styles.questionFlair : styles.opinionFlair}`}>{post.flair}</div>
                   <h1  className={styles.postTitle}>{post.title}</h1>
                   <p className={styles.postContent}>{post.content}</p>
 

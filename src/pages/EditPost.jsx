@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { supabase } from '../client';
 import { useParams } from 'react-router-dom';
 import styles from './styles/EditPost.module.css';
+import { MdOutlineArrowBack } from 'react-icons/md';
 
 const EditPost = () => {
 
@@ -86,6 +87,8 @@ const EditPost = () => {
       
       return (
             <div className={styles.editPostDiv}>
+            <div className={styles.backBtn}
+                  onClick={() => window.history.back()}> <MdOutlineArrowBack/> </div>
             <h2>Edit Post</h2>
             <form>
 
@@ -103,7 +106,7 @@ const EditPost = () => {
 
             <textarea className={styles.content} id='content' value={post?.content || ''} onChange={
                   (e) => setPost({...post, content: e.target.value})} type='text' name="content" placeholder="Text"></textarea>
-            <div style={{textAlign: 'right'}}> Character count: {charCount}</div> 
+            <div className={styles.wordCount} style={{textAlign: 'right'}}> Character count: {charCount}</div> 
             </form>
       
             <div>

@@ -33,7 +33,7 @@ const ReadComments = ({ token, postId }) => {
               <div className='comment' key={comment.comment_id}>
                 <div className='comment-header'>
                   <div className='comment-info'>
-                  <p>{moment(comment.created_at).fromNow()}</p>
+                  <p>Posted {moment(comment.created_at).fromNow()}</p>
                      
                     <div className='comment-actions'>
                      { comment.user_id === token.user.id && 
