@@ -46,6 +46,7 @@
       border-radius: 0.5rem;
     }
     
+  
     .content {
       display: flex;
       flex-direction: column;
@@ -110,3 +111,11 @@
     background-color: #ccc;
     color: teal;
   }
+
+  .read-more{
+    text-decoration: none;
+   }
+   
+   .read-more:hover{
+     text-decoration: underline;
+   }

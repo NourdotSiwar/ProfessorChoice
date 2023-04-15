@@ -2,11 +2,20 @@ import React, { useState, useEffect } from 'react';
 import { supabase } from '../client';
 import { useParams } from 'react-router-dom';
 import './styles/EditComment.css';
+import { useNavigate } from 'react-router-dom';
+import moment from 'moment';
 
-const EditComment = ({postId}) => {
+const EditComment = ({postId, token, comment}) => {
 
       const {id} = useParams();
-      const [comment, setComment] = useState(null);
+      const [editing, setEditing] = useState(false);
+      const [editedComment, setEditedComment] = useState(comment.comment_content)
+      const navigate = useNavigate();
+
+      const onCommentUpdate = () => {
+            window.location.reload();
+            navigate(`/post/${postId}`);
+      }
 
       useEffect(() => {
             const fetchComment = async () => {
@@ -15,65 +24,74 @@ const EditComment = ({postId}) => {
                   .select()
                   .eq('comment_id', id)
 
-                  setComment(data[0]);
+                  //setComment(data[0]);
                   
             }
             fetchComment().catch(console.error);
       }, [id]);
 
-      const updateComment = async (e) => {
+      const handleEditClick = () => {
+            setEditing(true);
+      }
+
+      const handleSaveClick = async (e) => {
             e.preventDefault();
-
-            postId = comment.post_id;
-
             await supabase
             .from('comments')
-            .update({ comment_content: comment.comment_content })
-            .eq('comment_id', id)
+            .update({ comment_content: editedComment })
+            .eq('comment_id', comment.comment_id)
 
-            console.log(postId);
-            window.location.href = `/post/${postId}`;
+            setEditing(false);
+            onCommentUpdate();
       }
 
+      const handleCancelClick = () => {
+            setEditedComment(comment.comment_content);
+            setEditing(false);
+          };
 
-      const deleteComment = async (e) => {
-            e.preventDefault();
+      const handleInputChange = (event) => {
+      setEditedComment(event.target.value);
+      };
 
-            await supabase
-            .from('comments')
-            .delete()
-            .eq('comment_id', id)
 
-            window.location.href = `/post/${postId}`;
-      }
-
-      if (!comment) {
-            return <div>Loading...</div>
-      }
+      const handleDeleteClick = async () => {
+            if (window.confirm('Are you sure you want to delete this comment?')) {
+              await supabase
+                .from('comments')
+                .delete()
+                .eq('comment_id', comment.comment_id);
+        
+              onCommentUpdate();
+            }
+          };
 
       return (
-
-            <div className='edit-comment'>
-                  <h1>Edit Comment</h1>
-                  <form onSubmit={updateComment}>
-                        <div className='form-group'>
-                              <label htmlFor='comment'>Comment</label>
-                              <textarea
-                                    className='form-control'
-                                    id='comment'
-                                    rows='3'
-                                    value={comment.comment_content}
-                                    onChange={(e) => setComment({ ...comment, comment_content: e.target.value })}
-                              ></textarea>
-                        </div>
-                        <button type='submit' className='btn btn-primary'>
-                              Update
-                        </button>
-                        <button type='submit' className='btn btn-danger' onClick={deleteComment}>
-                              Delete
-                        </button>
-                  </form>
+            <div className='comment'>
+            <div className='comment-header'>
+              <div className='comment-info'>
+                <p>Posted {moment(comment.created_at).fromNow()}</p>
+                {comment.user_id === token.user.id && (
+                  <div className='comment-actions'>
+                    {!editing && <button onClick={handleEditClick}>Edit</button>}
+                    {editing && (
+                      <>
+                        <button onClick={handleSaveClick}>Save</button>
+                        <button onClick={handleCancelClick}>Cancel</button>
+                      </>
+                    )}
+                    <button onClick={handleDeleteClick}>Delete</button>
+                  </div>
+                )}
+              </div>
             </div>
+            <div className='comment-body'>
+              {!editing && <p>{comment.comment_content}</p>}
+              {editing && (
+                <textarea value={editedComment} onChange={handleInputChange} />
+              )}
+            </div>
+          </div>
       );
       };
 

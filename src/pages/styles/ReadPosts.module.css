@@ -170,6 +170,14 @@ border-radius: 4px;
 margin-top: 0rem;
 }  
 
+.read-more{
+ text-decoration: none;
+}
+
+.read-more:hover{
+  text-decoration: underline;
+}
+
 .button-container {
 display: flex;
 justify-content: center;

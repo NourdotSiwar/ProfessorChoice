@@ -193,7 +193,7 @@ const DetailedPost = ( {token}) => {
                   </button>
                   ) : (
                   <button
-                  className={styles.upvotesBtn}
+                  className={styles.upvoteBtn}
                   onClick={() => updateUpvote(post.id)}
                   >
                   {post.upvotes} <BiUpvote/>
