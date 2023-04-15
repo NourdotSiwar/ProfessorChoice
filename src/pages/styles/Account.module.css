@@ -31,10 +31,13 @@
       margin-right: 3rem;
     }
     
+    .option span{
+      font-size: 1.2rem;
+      margin-right: 0.5rem;
+    }
     .option.active {
       background-color: #ccc;
       border-radius: 0.5rem;
-
     }
     
     .option:hover {
