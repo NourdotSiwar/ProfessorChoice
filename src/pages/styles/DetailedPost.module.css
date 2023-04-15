@@ -57,21 +57,16 @@ background-color: #79d1d6 ;
 .opinionFlair {
 background-color: #7798ed;
 }  
-
 .editBtn, .bookmarkBtn{
-  width: 50px;
-  height: 35px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  background-color: teal;
-  font-size: 1rem;
+  background-color: #f5f5f5;
+  border: none;
+  font-size: 20px;
   cursor: pointer;
-  color: white;
+  color: #000000;
 }
   
 .editBtn:hover, .bookmarkBtn:hover {
-  background-color: #ccc;
-  color: black;
+  color: teal;
 }
 
 .postTitle {
@@ -94,3 +89,29 @@ background-color: #7798ed;
   justify-content: center;
   align-items: center;
 }
+
+.upvotesBtn {
+  background-color: teal;
+  color: white;
+  border: none;
+  padding: 7px 10px;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 5px;
+  margin: 5px;
+  width: auto;
+  }
+  
+  .upvotes-btn {
+  width: 80px;
+  }
+  
+  .upvotesBtn:hover {
+  color: #333;
+  }
+  
+  .upvotesBtn:disabled {
+  background-color: #d3d3d3;
+  cursor: not-allowed;
+  color: teal;
+  }

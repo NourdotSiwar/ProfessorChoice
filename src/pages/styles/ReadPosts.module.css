@@ -111,34 +111,58 @@ box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
 }
 
 .post h3 {
+margin-top: 0rem;
 font-size: 1.5rem;
 margin-bottom: 0.5rem;
 }
 
-.post p {
-margin-bottom: 0.5rem;
+.postHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0rem;
+  margin-top: 0rem;
 }
+
+
+.edit-btn {
+  background-color: #f5f5f5;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  color: #000000;
+}
+
+.edit-btn:hover {
+  color: teal;
+}
+
 
 .time{
 font-size: 0.9rem;
+font-weight: bold;
 }
 
 .flair {
-  padding: 8px;
-  border-radius: 4px;
-  margin-bottom: 8px;
-  display: inline-block;
+  display: flex;
+  justify-content: left;
   color: white;
   font-size: 0.9rem;
   font-weight: bold;
-  }
+}
   
 .flair-question {
 background-color: #79d1d6 ;
+padding: 6px;
+border-radius: 4px;
+margin-top: 0rem;
 }
 
 .flair-opinion {
 background-color: #7798ed;
+padding: 6px;
+border-radius: 4px;
+margin-top: 0rem;
 }  
 
 .button-container {
@@ -149,7 +173,7 @@ border-top: 1px solid #ccc;
 padding-top: 10px;
 }
 
-.upvotes-btn, .edit-btn, .comments-btn {
+.upvotes-btn, .comments-btn {
 background-color: teal;
 color: white;
 border: none;
@@ -161,10 +185,10 @@ margin: 5px;
 }
 
 .upvotes-btn, .comments-btn {
-width: 80px;
+  width: auto;
 }
 
-.upvotes-btn:hover, .edit-btn:hover, .comments-btn:hover {
+.upvotes-btn:hover, .comments-btn:hover {
 color: #333;
 }
 

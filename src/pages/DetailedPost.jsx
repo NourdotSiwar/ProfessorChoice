@@ -12,6 +12,7 @@ import { BiUpvote } from 'react-icons/bi';
 import { BsBookmark } from 'react-icons/bs';
 import { BsBookmarkFill } from 'react-icons/bs';
 import { MdOutlineArrowBack } from 'react-icons/md';
+import Report from '../components/Report';
 
 const DetailedPost = ( {token}) => {
 
@@ -45,6 +46,26 @@ const DetailedPost = ( {token}) => {
             fetchPost().catch(console.error);
       }, [postId]);
 
+      useEffect(() => {
+            const fetchUpvotes = async () => {
+                  const { data, error } = await supabase
+                  .from('posts')
+                  .select('id, upvotes');
+                  
+                  if (error) {
+                        console.log('Error fetching upvotes:', error);
+                  } else {
+                        const voteCount = data.reduce((acc, post) => {
+                              acc[post.id] = post.upvotes;
+                              return acc;
+                        }, {});
+                        setUpvotes(voteCount);
+                  }
+            }
+
+            fetchUpvotes().catch(console.error);
+      }, []);
+
       const updateUpvote = async (postId) => {
 
             const { error } = await supabase
@@ -54,7 +75,7 @@ const DetailedPost = ( {token}) => {
 
             if(error) console.log('error updating upvote:', error)
             else {
-                  const { data, error } = await supabase
+                  const { data } = await supabase
                   .from('posts')
                   .select('*')
                   .eq('id', postId)
@@ -62,9 +83,7 @@ const DetailedPost = ( {token}) => {
 
                   setPost(data);
                   setUpvotes({ ...upvotes, [postId]: data.upvotes });
-
             }
-
         }
 
       const bookmarkPost = async (postId) => {
@@ -156,9 +175,10 @@ const DetailedPost = ( {token}) => {
                   
                   <div className={styles.actions}>
                   {post.user_id === token.user.id &&
-                  <Link to={`/edit/${post.id}`}><button className={styles.editBtn}><HiOutlinePencil/></button> </Link>}
+                  <Link style={{textDecoration:'none'}} to={`/edit/${post.id}`}><button className={styles.editBtn}><HiOutlinePencil/></button> </Link>}
                   <button onClick={() => bookmarkPost(post.id)} className={styles.bookmarkBtn}
                   >{isSaved ? <BsBookmarkFill/> : <BsBookmark/>}</button>
+                  <Report/>
                   </div>
                   </div>
 
@@ -168,12 +188,12 @@ const DetailedPost = ( {token}) => {
 
                   <div className={styles.upvoteCommentDiv}>
                   {post.user_id === token.user.id ? (
-                  <button className={styles.upvotesBtnSmall} disabled>
+                  <button className={styles.upvoteBtn} disabled>
                   {post.upvotes || 0} <BiUpvote/>
                   </button>
                   ) : (
                   <button
-                  className={styles.upvotesBtnSmall}
+                  className={styles.upvotesBtn}
                   onClick={() => updateUpvote(post.id)}
                   >
                   {post.upvotes} <BiUpvote/>
