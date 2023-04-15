@@ -24,7 +24,7 @@
   font-size: 1.2rem;
   cursor: pointer;
   color: teal;
-  margin-bottom: 10px;
+  margin-bottom: 15px;
 }
 
 .postHeader {
@@ -90,7 +90,7 @@ background-color: #7798ed;
   align-items: center;
 }
 
-.upvotesBtn {
+.upvoteBtn {
   background-color: teal;
   color: white;
   border: none;
@@ -102,15 +102,15 @@ background-color: #7798ed;
   width: auto;
   }
   
-  .upvotes-btn {
-  width: 80px;
+  .upvoteBtn {
+  width: auto;
   }
   
-  .upvotesBtn:hover {
+  .upvoteBtn:hover {
   color: #333;
   }
   
-  .upvotesBtn:disabled {
+  .upvoteBtn:disabled {
   background-color: #d3d3d3;
   cursor: not-allowed;
   color: teal;
