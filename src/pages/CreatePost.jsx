@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { supabase } from '../client';
 import styles from './styles/CreatePost.module.css';
-
+import { MdOutlineArrowBack } from 'react-icons/md';
 
 const CreatePost = () => {
 
@@ -95,7 +95,9 @@ const CreatePost = () => {
         
         <div className={styles.createPostDiv}>
             <form>
-                <h2>Write/Ask about a Professor!</h2>
+            <div className={styles.backBtn}
+                  onClick={() => window.history.back()}> <MdOutlineArrowBack/> </div>
+                <h2>Write about a Professor!</h2>
 
                 <div className={styles.flag}>
                 <button onClick={() => setFlair('question')} className={styles.question} disabled={flair === 'question'}>question</button>
@@ -110,7 +112,7 @@ const CreatePost = () => {
                   <div>
                         <textarea className={styles.content} id='content' value={content} onChange={handleContentChange}
                          type='text' name="content" placeholder="Text"></textarea>
-                        <div style={{textAlign: 'right'}}> Character count: {charCount}
+                        <div className={styles.wordCount} style={{textAlign: 'right'}}> Character count: {charCount}
                          </div>
                   </div> 
 

@@ -1,11 +1,11 @@
 .postContainer {
+  margin: 0 auto;
+  width: auto;
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
   margin-top: 5rem;
 }
-
 .detailedPost {
   width: 600px;
   margin: 0 auto;
@@ -15,6 +15,16 @@
   background-color: #f5f5f5;
   box-shadow: 0 0 10px 0 rgba(0,0,0,0.2);
   border-radius: 10px;
+}
+
+.backBtn{
+  width: 15px;
+  height: 15px;
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+  color: teal;
+  margin-bottom: 10px;
 }
 
 .postHeader {
@@ -31,12 +41,12 @@
 }
 
 .flair{
+  width: 60px;
   color: white;
-  background-color: #f5f5f5;
   border: none;
   border-radius: 5px;
   padding: 5px;
-  font-size: 1.1rem;
+  font-size: 1rem;
   box-shadow: 0 0 10px 0 rgba(0,0,0,0.2);
 }
 
@@ -59,7 +69,7 @@ background-color: #7798ed;
   color: white;
 }
   
-.editBtn:hover{
+.editBtn:hover, .bookmarkBtn:hover {
   background-color: #ccc;
   color: black;
 }

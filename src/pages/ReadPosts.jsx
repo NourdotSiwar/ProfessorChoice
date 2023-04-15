@@ -125,7 +125,7 @@ const ReadPosts = ({token}) => {
                                     
                                     <Link style={{color:'teal', textDecoration: 'none'}} to={`/post/${post.id}`}><div>
                                     <div className={`${styles.flair} ${styles[`flair-${post.flair.toLowerCase()}`]}`}>{post.flair}</div>
-                                    <p className={styles.time}>{moment(post.created_at).fromNow()}</p>
+                                    <p className={styles.time}> Posted {moment(post.created_at).fromNow()}</p>
                                     <h3>{post.title}</h3>
                                     <div>
                                     <p>{post.content.length > 50 ? post.content.substring(0, 50) + '...' : post.content} <Link className={styles['read-more']} style={{color:'black'}} to={`/post/${post.id}`}>More
