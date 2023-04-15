@@ -4,6 +4,9 @@ import styles from './styles/ReadPosts.module.css';
 import { Link } from 'react-router-dom';
 import moment from 'moment';
 import Loading from '../components/Loading';
+import { HiOutlinePencil } from 'react-icons/hi';
+import { BiUpvote } from 'react-icons/bi';
+import { FaCommentDots } from 'react-icons/fa';
 
 const ReadPosts = ({token}) => {
 
@@ -130,14 +133,17 @@ const ReadPosts = ({token}) => {
                                     </div></Link>
 
                                     <div className={styles['button-container']}>
+                                    
+                                          <Link to={`/post/${post.id}`}><button className={styles['comments-btn']}>{post.commentcount || 0} <FaCommentDots/></button></Link>
+
                                           {post.user_id === token.user.id ? (
-                                                <button className={styles['upvotes-btn']} disabled> {post.upvotes || 0} △</button>
+                                                <button className={styles['upvotes-btn']} disabled> {post.upvotes || 0} <BiUpvote/></button>
                                           ) : (
-                                                <button className={styles['upvotes-btn']} onClick={() => updateUpvote(post.id)}>{post.upvotes} ▲</button>
+                                                <button className={styles['upvotes-btn']} onClick={() => updateUpvote(post.id)}>{post.upvotes} <BiUpvote/></button>
                                           )}
 
                                     {post.user_id === token.user.id &&
-                                          <Link to={`/edit/${post.id}`}><button className={styles['edit-btn']}>Edit</button> </Link>}
+                                          <Link to={`/edit/${post.id}`}><button className={styles['edit-btn']}><HiOutlinePencil/></button> </Link>}
                                     </div>
                               </div>
                         ))}

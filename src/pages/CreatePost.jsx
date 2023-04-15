@@ -64,9 +64,9 @@ const CreatePost = () => {
     const handleEmptyForm = (event) => {
         event.preventDefault();
       
-        if (post.title === '' || post.content === '' || 
-        (post.flair === 'question' && post.content.length < 100) ||
-        (post.flair === 'opinion' && post.content.length < 250)) {
+        if (title === '' || content === '' || 
+        (flair === 'question' && content.length < 100) ||
+        (flair === 'opinion' && content.length < 250)) {
           let message = '';
           if (flair === '') {
             message += 'Flair required.\n';
