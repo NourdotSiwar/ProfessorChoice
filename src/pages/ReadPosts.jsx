@@ -105,7 +105,7 @@ const ReadPosts = ({token}) => {
                       <h3 className={styles['welcome-message']}>Welcome, {token.user.user_metadata.full_name.split(' ')[0]}</h3>
 
                         <div className={styles['search-bar']}>
-                        <input type="text" placeholder="Search..." onChange={handleSearch} />     
+                        <input type="text" placeholder="Search" onChange={handleSearch} />
                         <button className={styles['clear-btn']} onClick={clearFilter}>Clear</button>
                         </div>
 

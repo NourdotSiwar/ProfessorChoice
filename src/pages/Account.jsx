@@ -3,6 +3,10 @@ import { supabase } from '../client'
 import styles from './styles/Account.module.css';
 import moment from 'moment';
 import { Link } from 'react-router-dom';
+import { CgProfile } from 'react-icons/cg';
+import { MdPostAdd } from 'react-icons/md';
+import { AiOutlineComment } from 'react-icons/ai';
+import { BsBookmarkCheckFill } from 'react-icons/bs';
 
 const Account = ({token}) => {
       const [user, setUser] = useState(null)
@@ -95,16 +99,16 @@ const Account = ({token}) => {
               <div className={styles.sidebar}>
                 <ul className={styles.accountList}>
                   <li className={`${styles.option} ${selectedOption === 'profile' ? styles.active : ''}`} onClick={() => handleOptionClick('profile')}>
-                  Profile
+                  <span><CgProfile/></span> Profile
                   </li>
                   <li className={`${styles.option} ${selectedOption === 'posts' ? styles.active : ''}`} onClick={() => handleOptionClick('posts')}>
-                  Posts
+                  <span><MdPostAdd/></span>Posts
                   </li>
                   <li className={`${styles.option} ${selectedOption === 'comments' ? styles.active : ''}`} onClick={() => handleOptionClick('comments')}>
-                  Comments
+                  <span><AiOutlineComment/></span>Comments
                   </li>
                   <li className={`${styles.option} ${selectedOption === 'saved' ? styles.active : ''}`} onClick={() => handleOptionClick('saved')}>
-                  Saved
+                  <span><BsBookmarkCheckFill/></span>Saved
                   </li>
                 </ul>
               </div>
