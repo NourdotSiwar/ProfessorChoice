@@ -30,10 +30,10 @@ fix the following files:
 3. EditPost - DONE
 4. DetailedPost - DONE
 
-* CRUD comments
-1. ReadComments
-2. CreateComments
-3. EditComments
+* CRUD comments -DONE
+1. ReadComments - DONE
+2. CreateComments - DONE
+3. EditComments - DONE
 
 * SignUp/Login - DONE
 * Account - DONE

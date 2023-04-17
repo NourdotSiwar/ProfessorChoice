@@ -1,9 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { supabase } from '../client';
 import { useParams } from 'react-router-dom';
-import './styles/EditComment.css';
 import { useNavigate } from 'react-router-dom';
 import moment from 'moment';
+import Report from '../components/Report';
+import { MdDelete } from 'react-icons/md';
+import { BiPencil } from 'react-icons/bi';
+import { GiCancel } from 'react-icons/gi';
+import { FaSave } from 'react-icons/fa';
+import styles from './styles/EditComment.module.css';
 
 const EditComment = ({postId, token, comment}) => {
 
@@ -67,25 +72,28 @@ const EditComment = ({postId, token, comment}) => {
           };
 
       return (
-            <div className='comment'>
-            <div className='comment-header'>
-              <div className='comment-info'>
+            <div className={styles.comment}>
+            <div className={styles.commentHeader}>
+              <div className={styles.commentInfo}>
                 <p>Posted {moment(comment.created_at).fromNow()}</p>
+                <div className={styles.commentActions}>
                 {comment.user_id === token.user.id && (
-                  <div className='comment-actions'>
-                    {!editing && <button onClick={handleEditClick}>Edit</button>}
+                  <>
+                    {!editing && <button onClick={handleEditClick}><BiPencil/></button>}
                     {editing && (
                       <>
-                        <button onClick={handleSaveClick}>Save</button>
-                        <button onClick={handleCancelClick}>Cancel</button>
+                        <button onClick={handleSaveClick}><FaSave/></button>
+                        <button onClick={handleCancelClick}><GiCancel/></button>
                       </>
                     )}
-                    <button onClick={handleDeleteClick}>Delete</button>
-                  </div>
+                    <button onClick={handleDeleteClick}><MdDelete/></button>
+                    </>
                 )}
+                <Report/>
+                </div>
               </div>
             </div>
-            <div className='comment-body'>
+            <div className={styles.commentBody}>
               {!editing && <p>{comment.comment_content}</p>}
               {editing && (
                 <textarea value={editedComment} onChange={handleInputChange} />

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { supabase } from '../client';
-import './styles/ReadComments.css'
+import styles from './styles/ReadComments.module.css';
 import EditComment from './EditComment';
 
 const ReadComments = ({ token, postId }) => {
@@ -25,7 +25,7 @@ const ReadComments = ({ token, postId }) => {
       }
 
       return (
-        <div className='comments'>
+        <div className={styles.commentDiv}>
         {comments.map((comment) => (
           <EditComment key={comment.comment_id} token={token} comment={comment} 
           postId={postId} />

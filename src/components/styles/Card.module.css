@@ -1,0 +1,60 @@
+.card {
+      display: flex;
+      height: auto;
+      width: 95%;
+      margin: 10px;
+      border-radius: 10px;
+      background: hsla(196, 53%, 50%, 1);
+      background: linear-gradient(200deg, hsla(196, 53%, 50%, 1) 30%, hsla(212, 93%, 49%, 1) 100%);
+  }
+  
+  .image-name {
+      margin: 5px;
+      width: 6.8rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+  }
+  
+  .name {
+      text-align: center;
+      font-size: 10px;
+      font-weight: bold;
+  }
+  
+  .image {
+      height: 50px;
+      transform: scale(1.2);
+      border-radius: 50%;
+  }
+  
+  .content {
+      width: 480px;
+      padding: 10px;
+  }
+  
+  .text { 
+      text-align: left;
+  }
+  
+  /*
+  --------------RESPONSIVIDADE-----------------
+  */
+  
+  
+  @media (max-width: 660px) {
+      .card {
+          width: 250px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          overflow-x: scroll;
+      }
+      .text {
+          width: 50px;
+      }
+      .image-name {
+          width: 250px;
+      }
+  }

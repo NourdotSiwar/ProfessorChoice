@@ -58,7 +58,7 @@ background-color: #79d1d6 ;
 background-color: #7798ed;
 }  
 .editBtn, .bookmarkBtn{
-  background-color: #f5f5f5;
+  background-color: transparent;
   border: none;
   font-size: 20px;
   cursor: pointer;
@@ -72,6 +72,24 @@ background-color: #7798ed;
 .postTitle {
   margin-top: 20px;
   margin-bottom: 10px;
+}
+
+.postAuthor {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: bold;
+  color: teal;
+  margin-bottom: 2rem;
+}
+
+.Author{
+  text-decoration: none;
+  color: teal;
+  font-size: 1rem;
+}
+
+.Author:hover {
+  text-decoration: underline;
 }
 
 .postContent {
@@ -91,14 +109,11 @@ background-color: #7798ed;
 }
 
 .upvoteBtn {
-  background-color: teal;
-  color: white;
+  background-color: transparent;
+  color: teal;
   border: none;
-  padding: 7px 10px;
-  font-size: 16px;
+  font-size: 17px;
   cursor: pointer;
-  border-radius: 5px;
-  margin: 5px;
   width: auto;
   }
   
@@ -111,7 +126,7 @@ background-color: #7798ed;
   }
   
   .upvoteBtn:disabled {
-  background-color: #d3d3d3;
+  background-color: transparent;
   cursor: not-allowed;
   color: teal;
   }

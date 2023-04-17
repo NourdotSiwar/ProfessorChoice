@@ -37,7 +37,7 @@
   margin-bottom: 10px;
 }
 
-.loginBtn:hover, .signupBtn {
+.loginBtn:hover, .signupBtn:hover {
   background-color: #555;
 }
 

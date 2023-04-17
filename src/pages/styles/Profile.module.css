@@ -1,0 +1,121 @@
+.account {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.sidebar {
+  border-bottom: 1px solid teal;
+  width: 70%;
+  color: teal;
+  font-weight: bold;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 15%;  
+}
+
+.accountList {
+  list-style: none;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  width: 100%;
+}
+
+.option {
+  font-size: 1.2rem;
+  padding: 0.8rem;
+  cursor: pointer;
+  margin-right: 3rem;
+}
+
+.option span{
+  font-size: 1.2rem;
+  margin-right: 0.5rem;
+}
+.option.active {
+  background-color: #ccc;
+  border-radius: 0.5rem;
+}
+
+.option:hover {
+  background-color: #ccc;
+  transition: all 0.3s ease-in-out;
+  border-radius: 0.5rem;
+}
+
+
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 70%;
+  position: absolute;
+  top: 30%;
+}
+
+span {
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.profile button {
+  margin-top: 1rem;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 0.5rem;
+  background-color: teal;
+  color: #fff;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.profile button:hover {
+  background-color: #ccc;
+  color: teal;
+}
+
+.commentList, .postList{
+  background-color: #f5f5f5;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  margin-bottom: 2rem;
+  width: 20rem;
+  margin-top: 40px;
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-bottom: 50px;
+}
+
+.commentCount, .postCount {
+font-size: 1.2rem;
+font-weight: bold;
+}
+
+.viewBtn{
+margin-top: 1rem;
+padding: 0.5rem 1rem;
+border: none;
+border-radius: 0.5rem;
+background-color: teal;
+color: #fff;
+cursor: pointer;
+font-size: 1rem;
+}
+
+.viewBtn:hover {
+background-color: #ccc;
+color: teal;
+}
+
+.read-more{
+text-decoration: none;
+}
+
+.read-more:hover{
+ text-decoration: underline;
+}
