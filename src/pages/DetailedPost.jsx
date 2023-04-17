@@ -133,6 +133,26 @@ const DetailedPost = ( {token}) => {
       }
 
       useEffect(() => {
+            const fetchUsername = async () => {
+                  if(!post.user_id) return;
+
+                  const { data: user, error } = await supabase
+                  .from('users')
+                  .select('username')
+                  .eq('id', post.user_id)
+                  .maybeSingle();
+
+                  if (error) {
+                        console.log('Error fetching username:', error);
+                  } else {
+                        setPost({ ...post, username: user.username });
+                  }
+            }
+
+            fetchUsername().catch(console.error);
+      }, [post]);
+
+      useEffect(() => {
             const fetchSavedPosts = async () => {
 
             if (!token) {
@@ -184,6 +204,8 @@ const DetailedPost = ( {token}) => {
 
                   <div className={`${styles.flair} ${post.flair === 'question' ? styles.questionFlair : styles.opinionFlair}`}>{post.flair}</div>
                   <h1  className={styles.postTitle}>{post.title}</h1>
+                  <p className={styles.postAuthor}>By <Link to={`/profile/${post.user_id}`} style={{textDecoration:'none'}}><span className={styles.Author}>{post.username}</span></Link> </p>
+                  
                   <p className={styles.postContent}>{post.content}</p>
 
                   <div className={styles.upvoteCommentDiv}>

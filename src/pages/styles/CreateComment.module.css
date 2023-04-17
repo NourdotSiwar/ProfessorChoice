@@ -1,0 +1,40 @@
+.createComment {
+      padding: 10px;
+      border: none;
+      background-color: #f9f9f9;
+      border-radius: 5px;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      width: 85%;
+    }
+    
+    .createComment input[type="text"] {
+      width: 83%;
+      padding: 12px 20px;
+      box-sizing: border-box;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      height: 35px;
+    }
+    
+    .createComment input[type="submit"] {
+      background-color: teal;
+      color: white;
+      border: none;
+      padding: 7px 10px;
+      font-size: 16px;
+      cursor: pointer;
+      border-radius: 5px;
+      width: auto;
+      margin: 5px;
+    }
+
+    .createComment input[type="submit"]:hover {
+      background-color: #ccc;
+      color: teal;
+    }
+    

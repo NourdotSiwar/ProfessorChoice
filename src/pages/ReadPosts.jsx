@@ -135,15 +135,16 @@ const ReadPosts = ({token}) => {
                                           <Report/>
                                     </div>
                                     </div>
-                                    <Link style={{color:'teal', textDecoration: 'none'}} to={`/post/${post.id}`}><div>
+                                    <Link style={{color:'teal', textDecoration: 'none'}} to={`/post/${post.id}`}>
+                                    
                                     <div className={styles.flair}>
                                     <p className={styles[`flair-${post.flair.toLowerCase()}`]}>{post.flair}</p>
                                     </div>
+
                                     <h3>{post.title}</h3>
-                                    <div>
-                                    <p>{post.content.length > 50 ? post.content.substring(0, 50) + '...' : post.content} <Link className={styles['read-more']} style={{color:'black'}} to={`/post/${post.id}`}>More
-                                    </Link></p></div>
-                                    </div></Link>
+                                    <p className={styles.postContent}>{post.content.length > 50 ? post.content.substring(0, 50) + '...' : post.content} <Link className={styles['read-more']} style={{color:'black'}} to={`/post/${post.id}`}>More
+                                    </Link></p>
+                                    </Link>
 
                                     <div className={styles['button-container']}>
                                     

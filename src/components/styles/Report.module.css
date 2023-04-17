@@ -73,7 +73,7 @@
 
     .report-form button {
       background-color: rgb(193, 109, 109);
-      color: #ffffff;
+      color:transparent;
       border: none;
       border-radius: 5px;
       padding: 10px;

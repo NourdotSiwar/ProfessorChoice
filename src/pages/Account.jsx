@@ -7,13 +7,17 @@ import { CgProfile } from 'react-icons/cg';
 import { MdPostAdd } from 'react-icons/md';
 import { AiOutlineComment } from 'react-icons/ai';
 import { BsBookmarkCheckFill } from 'react-icons/bs';
+import { SiGooglemessages } from 'react-icons/si';
+import Chat from '../components/Chat';
 
-const Account = ({token}) => {
+const Account = () => {
       const [user, setUser] = useState(null)
       const [posts, setPosts] = useState([])
       const [comments, setComments] = useState([])
       const [selectedOption, setSelectedOption] = useState('profile');
       const [savedPosts, setSavedPosts] = useState([]);
+      const [editUsername, setEditUsername] = useState(false);
+      const [newUsername, setNewUsername] = useState('');
       
       const handleOptionClick = (option) => {
             setSelectedOption(option);
@@ -35,6 +39,27 @@ const Account = ({token}) => {
       }, [])
 
       useEffect(() => {
+            const fetchUserData = async () => {
+                  if(user) {
+                  const { data, error } = await supabase
+                  .from('users')
+                  .select('*')
+                  .eq('id', user.id)
+                  .maybeSingle();
+
+                  if (error) console.log('error fetching user data:', error)
+                  else {
+                        setUser(data);
+                  }
+
+            }
+      }
+            fetchUserData().catch(console.error);
+      }, [user])
+
+
+
+      useEffect(() => {
             const fetchPosts = async () => {
               if (user) {
                 const { data } = await supabase
@@ -48,8 +73,7 @@ const Account = ({token}) => {
             }
           
             fetchPosts().catch(console.error);
-          }, [user])
-          
+          }, [user])   
 
       useEffect(() => {
             const fetchComments = async () => {
@@ -92,14 +116,41 @@ const Account = ({token}) => {
       } 
 
             fetchSavedPosts().catch(console.error);   
-      }, [user])          
+      }, [user])     
+      
+      const updateUsername = async () => {
+            const { data, error } = await supabase
+            .from('users')
+            .update({ username: newUsername })
+            .eq('id', user.id)
+            .single();
 
-        return (
+            if (error) console.log('error updating username:', error)
+            else {
+                  setUser(data);
+            }
+      }
+
+      const handleEditClick = () => {
+            setEditUsername(true);
+      }
+
+      const handleUpdateClick = () => {
+            setEditUsername(false);
+            updateUsername();
+      }
+
+ return (
             <div className={styles.account}>
               <div className={styles.sidebar}>
                 <ul className={styles.accountList}>
                   <li className={`${styles.option} ${selectedOption === 'profile' ? styles.active : ''}`} onClick={() => handleOptionClick('profile')}>
                   <span><CgProfile/></span> Profile
+                  </li>
+                  <li
+                  className={`${styles.option} ${selectedOption === 'chats' ? styles.active : ''}`}
+                  onClick={() => handleOptionClick('chats')}>
+                  <span><SiGooglemessages/></span> Chats
                   </li>
                   <li className={`${styles.option} ${selectedOption === 'posts' ? styles.active : ''}`} onClick={() => handleOptionClick('posts')}>
                   <span><MdPostAdd/></span>Posts
@@ -117,10 +168,22 @@ const Account = ({token}) => {
                 {selectedOption === 'profile' && (
                   <div className={styles.profile}>
                         <div className={styles.details}>
-                              <p><span>Name:</span> {token.user.user_metadata.full_name}</p>
-                              <p><span>Email:</span> {token.user.email}</p>
+                                 
+                              <p><span>Username:</span> {user?.username}</p>
+                              <p><span>Full Name:</span> {user?.fullname}</p>
+                              <p><span>Email:</span> {user?.email}</p>
                               <p><span>Joined:</span> {moment(user?.created_at).format('MMMM D, YYYY')}</p>
                               <button onClick={handleLogout}>Sign Out</button>
+
+                              <div className={styles.editUsername}>
+                              {!editUsername && <button onClick={handleEditClick }>Update User</button>}
+                              {editUsername &&(
+                                    <>
+                               <input type="text" value={newUsername} onChange={(e) => setNewUsername(e.target.value)}
+                               placeholder="Enter new username" /> <button onClick={handleUpdateClick}>Update</button>
+                                    </>
+                              )}
+                              </div>
                         </div>
                   </div>
                 )}
@@ -171,7 +234,14 @@ const Account = ({token}) => {
                         </div>
                   </div>
                   )}
+
+                  {selectedOption === 'chats' && (
+                        <div className={styles.chats}>
+                              <Chat />
+                        </div>
+                  )}
               </div>
             </div>
 )};
-        export default Account;
+
+export default Account;

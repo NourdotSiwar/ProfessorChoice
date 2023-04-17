@@ -131,7 +131,7 @@ margin-bottom: 0.5rem;
 
 
 .edit-btn {
-  background-color: #f5f5f5;
+  background-color: transparent;
   border: none;
   font-size: 20px;
   cursor: pointer;
@@ -152,8 +152,8 @@ font-weight: bold;
   display: flex;
   justify-content: left;
   color: white;
-  font-size: 0.9rem;
   font-weight: bold;
+  margin-bottom: 1rem;
 }
   
 .flair-question {
@@ -161,6 +161,7 @@ background-color: #79d1d6 ;
 padding: 6px;
 border-radius: 4px;
 margin-top: 0rem;
+font-size: 0.9rem;
 }
 
 .flair-opinion {
@@ -168,7 +169,13 @@ background-color: #7798ed;
 padding: 6px;
 border-radius: 4px;
 margin-top: 0rem;
+font-size: 0.9rem;
 }  
+
+.postContent{
+  margin-bottom: 0.5rem;
+  font-size: 1.1rem;
+}
 
 .read-more{
  text-decoration: none;
