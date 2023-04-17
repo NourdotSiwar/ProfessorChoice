@@ -50,6 +50,17 @@ icon react: https://react-icons.github.io/react-icons/search?q=vote
 10. Saved professors
 Utilized Instagram feature of saving posts
 
+11. chat functionality
+* utilized supabase commuity
+* credit: https://reactjsexample.com/a-chat-app-using-reactjs-and-supabase/
+* struggled with letting messages show, utilized project above
+* struggled with getting db to listen to users message
+* struggled with bar scrolling down automatically
+* credit for bar: https://stackoverflow.com/questions/37620694/how-to-scroll-to-bottom-in-react
+* credit for bar behavior: https://developer.mozilla.org/en-US/docs/Web/API/Element/scrollIntoView
+* struggled with only showing conversations with users that alr conversed with the current user
+
+
 
 
 
