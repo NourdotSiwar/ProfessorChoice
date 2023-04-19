@@ -1,14 +1,16 @@
 .posts-section{
 display: flex;
 flex-direction: column;
-margin-top: 50px;
+margin-top: 60px;
+margin-bottom: 60px;
+color: white;
 }
 
 .welcome-message {
-  font-size: 24px;
+  font-size: 2rem;
   font-weight: bold;
-  margin: 20px 0;
-  color: #333;
+  margin: 20px 0px;
+  color: white;
   text-align: center;
   text-transform: capitalize;
 }
@@ -23,9 +25,10 @@ margin-top: 20px;
 .search-bar input[type="text"] {
 border: none;
 padding: 10px;
-font-size: 16px;
+padding-left: 20px;
+font-size: 1rem;
 width: 100%;
-max-width: 400px;
+max-width: 300px;
 border-radius: 25px;
 box-shadow: 0px 3px 15px rgba(0,0,0,0.2);
 transition: all 0.3s ease-in-out;
@@ -33,37 +36,45 @@ background-color: #fff;
 color: #333;
 }
 
+.search-bar input[type="text"]:focus {
+outline: none;
+box-shadow: 0px 8px 15px rgba(0,0,0,0.4);
+}
+
 .clear-btn {
-background-color: teal;
-color: white;
+background-color: white;
+color: #2a96a1;
 border: none;
 padding: 10px;
-font-size: 16px;
+font-size: 1rem;
+width: 5rem;
 cursor: pointer;
 border-radius: 20px;
 margin: 5px;
+box-shadow: 0px 3px 15px rgba(0,0,0,0.2);
 }
 
 .clear-btn:hover {
-background-color: #e6e6e6;
+background-color: white;
 color: #333;
 }
 
 .order-by-container button, 
 .filter-container button {
-background-color: teal;
-color: white;
+background-color: white;
+color: #2a96a1;
 border: none;
 padding: 5px 10px;
 font-size: 16px;
 cursor: pointer;
 border-radius: 5px;
 margin: 5px;
+box-shadow: 0px 3px 15px rgba(0,0,0,0.2);
 }
 
 .order-by-container button:hover,
 .filter-container button:hover {
-background-color: #e6e6e6;
+background-color: white;
 color:#333;
 }
 
@@ -71,7 +82,7 @@ color:#333;
 .filter-container button:disabled {
 background-color: #d3d3d3;
 cursor: not-allowed;
-color: teal;
+color: #2a96a1;
 }
 
 .order-by-container {
@@ -97,49 +108,90 @@ justify-content: center;
 background-color: #f5f5f5;
 padding: 1rem;
 border-radius: 0.5rem;
-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+box-shadow: 0 4px 4px rgba(0, 0, 0, 0.2);
 margin-bottom: 2rem;
 width: 20rem;
 margin-top: 40px;
 margin-left: 10px;
 margin-right: 10px;
 margin-bottom: 0px;
+transition: all 0.3s ease-in-out;
 }
 
 .post:hover{
-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+box-shadow: 0 8px 4px rgba(0, 0, 0, 0.4);
 }
 
 .post h3 {
+margin-top: 0rem;
 font-size: 1.5rem;
 margin-bottom: 0.5rem;
 }
 
-.post p {
-margin-bottom: 0.5rem;
+.postHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0rem;
+  margin-top: 0rem;
 }
+
+
+.edit-btn {
+  background-color: transparent;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  color: #000000;
+}
+
+.edit-btn:hover {
+  color:#2a96a1;
+}
+
 
 .time{
 font-size: 0.9rem;
+font-weight: bold;
+color: black;
 }
 
 .flair {
-  padding: 8px;
-  border-radius: 4px;
-  margin-bottom: 8px;
-  display: inline-block;
+  display: flex;
+  justify-content: left;
   color: white;
-  font-size: 0.9rem;
   font-weight: bold;
-  }
+  margin-bottom: 1rem;
+}
   
 .flair-question {
 background-color: #79d1d6 ;
+padding: 6px;
+border-radius: 4px;
+margin-top: 0rem;
+font-size: 0.9rem;
 }
 
 .flair-opinion {
 background-color: #7798ed;
+padding: 6px;
+border-radius: 4px;
+margin-top: 0rem;
+font-size: 0.9rem;
 }  
+
+.postContent{
+  margin-bottom: 0.5rem;
+  font-size: 1.1rem;
+}
+
+.read-more{
+ text-decoration: none;
+}
+
+.read-more:hover{
+  text-decoration: underline;
+}
 
 .button-container {
 display: flex;
@@ -149,11 +201,11 @@ border-top: 1px solid #ccc;
 padding-top: 10px;
 }
 
-.upvotes-btn, .edit-btn, .comments-btn {
-background-color: teal;
+.upvotes-btn, .comments-btn {
+background-color:#2a96a1;
 color: white;
 border: none;
-padding: 10px;
+padding: 7px 10px;
 font-size: 16px;
 cursor: pointer;
 border-radius: 5px;
@@ -161,15 +213,15 @@ margin: 5px;
 }
 
 .upvotes-btn, .comments-btn {
-width: 80px;
+  width: auto;
 }
 
-.upvotes-btn:hover, .edit-btn:hover, .comments-btn:hover {
+.upvotes-btn:hover, .comments-btn:hover {
 color: #333;
 }
 
 .upvotes-btn:disabled {
 background-color: #d3d3d3;
 cursor: not-allowed;
-color: teal;
+color: #2a96a1;
 }

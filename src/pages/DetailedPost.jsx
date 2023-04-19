@@ -11,6 +11,8 @@ import { HiOutlinePencil } from 'react-icons/hi';
 import { BiUpvote } from 'react-icons/bi';
 import { BsBookmark } from 'react-icons/bs';
 import { BsBookmarkFill } from 'react-icons/bs';
+import { MdOutlineArrowBack } from 'react-icons/md';
+import Report from '../components/Report';
 
 const DetailedPost = ( {token}) => {
 
@@ -44,6 +46,26 @@ const DetailedPost = ( {token}) => {
             fetchPost().catch(console.error);
       }, [postId]);
 
+      useEffect(() => {
+            const fetchUpvotes = async () => {
+                  const { data, error } = await supabase
+                  .from('posts')
+                  .select('id, upvotes');
+                  
+                  if (error) {
+                        console.log('Error fetching upvotes:', error);
+                  } else {
+                        const voteCount = data.reduce((acc, post) => {
+                              acc[post.id] = post.upvotes;
+                              return acc;
+                        }, {});
+                        setUpvotes(voteCount);
+                  }
+            }
+
+            fetchUpvotes().catch(console.error);
+      }, []);
+
       const updateUpvote = async (postId) => {
 
             const { error } = await supabase
@@ -53,7 +75,7 @@ const DetailedPost = ( {token}) => {
 
             if(error) console.log('error updating upvote:', error)
             else {
-                  const { data, error } = await supabase
+                  const { data } = await supabase
                   .from('posts')
                   .select('*')
                   .eq('id', postId)
@@ -61,9 +83,7 @@ const DetailedPost = ( {token}) => {
 
                   setPost(data);
                   setUpvotes({ ...upvotes, [postId]: data.upvotes });
-
             }
-
         }
 
       const bookmarkPost = async (postId) => {
@@ -113,6 +133,26 @@ const DetailedPost = ( {token}) => {
       }
 
       useEffect(() => {
+            const fetchUsername = async () => {
+                  if(!post.user_id) return;
+
+                  const { data: user, error } = await supabase
+                  .from('users')
+                  .select('username')
+                  .eq('id', post.user_id)
+                  .maybeSingle();
+
+                  if (error) {
+                        console.log('Error fetching username:', error);
+                  } else {
+                        setPost({ ...post, username: user.username });
+                  }
+            }
+
+            fetchUsername().catch(console.error);
+      }, [post]);
+
+      useEffect(() => {
             const fetchSavedPosts = async () => {
 
             if (!token) {
@@ -148,25 +188,34 @@ const DetailedPost = ( {token}) => {
                   {!loading && post?.title && (
                         <>
                   <div className={styles.detailedPost}>
+                  <div className={styles.backBtn}
+                  onClick={() => window.history.back()}> <MdOutlineArrowBack/> </div>
                   <div className={styles.postHeader}>
-                  <p className={styles.postTime}>{moment(post.created_at).fromNow()}</p>
-                  <p className={`${styles.flair} ${post.flair === 'question' ? styles.questionFlair : styles.opinionFlair}`}>{post.flair}</p>
+                  <p className={styles.postTime}>Posted {moment(post.created_at).fromNow()}</p>
+                  
+                  <div className={styles.actions}>
                   {post.user_id === token.user.id &&
-                    <Link to={`/edit/${post.id}`}><button className={styles.editBtn}><HiOutlinePencil/></button> </Link>}
+                  <Link style={{textDecoration:'none'}} to={`/edit/${post.id}`}><button className={styles.editBtn}><HiOutlinePencil/></button> </Link>}
                   <button onClick={() => bookmarkPost(post.id)} className={styles.bookmarkBtn}
                   >{isSaved ? <BsBookmarkFill/> : <BsBookmark/>}</button>
+                  <Report/>
                   </div>
+                  </div>
+
+                  <div className={`${styles.flair} ${post.flair === 'question' ? styles.questionFlair : styles.opinionFlair}`}>{post.flair}</div>
                   <h1  className={styles.postTitle}>{post.title}</h1>
+                  <p className={styles.postAuthor}>By <Link to={`/profile/${post.user_id}`} style={{textDecoration:'none'}}><span className={styles.Author}>{post.username}</span></Link> </p>
+                  
                   <p className={styles.postContent}>{post.content}</p>
 
                   <div className={styles.upvoteCommentDiv}>
                   {post.user_id === token.user.id ? (
-                  <button className={styles.upvotesBtnSmall} disabled>
+                  <button className={styles.upvoteBtn} disabled>
                   {post.upvotes || 0} <BiUpvote/>
                   </button>
                   ) : (
                   <button
-                  className={styles.upvotesBtnSmall}
+                  className={styles.upvoteBtn}
                   onClick={() => updateUpvote(post.id)}
                   >
                   {post.upvotes} <BiUpvote/>

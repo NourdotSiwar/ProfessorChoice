@@ -7,6 +7,7 @@ import Loading from '../components/Loading';
 import { HiOutlinePencil } from 'react-icons/hi';
 import { BiUpvote } from 'react-icons/bi';
 import { FaCommentDots } from 'react-icons/fa';
+import Report from '../components/Report';
 
 const ReadPosts = ({token}) => {
 
@@ -17,6 +18,11 @@ const ReadPosts = ({token}) => {
       const [flair, setFlair] = useState('')
       const [filteredPosts, setFilteredPosts] = useState([])
       const [loading, setLoading] = useState(false);
+      const [showReportForm, setShowReportForm] = useState(false)
+
+      const toggleReportForm = () => {
+            setShowReportForm(!showReportForm);
+          };
 
             const filterPosts = () => {
                   return post.filter((post) => {
@@ -96,16 +102,15 @@ const ReadPosts = ({token}) => {
 
       return (
             <div className={styles['posts-section']}>
-
                       <h3 className={styles['welcome-message']}>Welcome, {token.user.user_metadata.full_name.split(' ')[0]}</h3>
 
                         <div className={styles['search-bar']}>
-                        <input type="text" placeholder="Search..." onChange={handleSearch} />     
+                        <input type="text" placeholder="Search" onChange={handleSearch} />
                         <button className={styles['clear-btn']} onClick={clearFilter}>Clear</button>
                         </div>
 
                         <div className={styles['order-by-container']}>
-                        <p> Filter by: </p> 
+                        <p style={{fontWeight: 'bold', fontSize: '18px'}}> Filter by: </p> 
                               <button onClick={() => setOrder('newest')} disabled={order === 'newest'}>Newest</button>
                               <button onClick={() => setOrder('oldest')} disabled={order === 'oldest'}>Oldest</button>
                         </div>
@@ -122,15 +127,24 @@ const ReadPosts = ({token}) => {
                         
                         {filteredPosts.map((post) => (
                                <div className={styles['post']} key={post.id}>
+                                    <div className={styles.postHeader}>
+                                    <p className={styles.time}> Posted {moment(post.created_at).fromNow()}</p>
+                                    <div className={styles.actions}>
+                                    {post.user_id === token.user.id &&
+                                          <Link style={{textDecoration:'none'}} to={`/edit/${post.id}`}><button className={styles['edit-btn']}><HiOutlinePencil/></button> </Link>}
+                                          <Report/>
+                                    </div>
+                                    </div>
+                                    <Link style={{color:'#2a96a1', textDecoration: 'none'}} to={`/post/${post.id}`}>
                                     
-                                    <Link style={{color:'teal', textDecoration: 'none'}} to={`/post/${post.id}`}><div>
-                                    <div className={`${styles.flair} ${styles[`flair-${post.flair.toLowerCase()}`]}`}>{post.flair}</div>
-                                    <p className={styles.time}>{moment(post.created_at).fromNow()}</p>
+                                    <div className={styles.flair}>
+                                    <p className={styles[`flair-${post.flair.toLowerCase()}`]}>{post.flair}</p>
+                                    </div>
+
                                     <h3>{post.title}</h3>
-                                    <div>
-                                    <p>{post.content.length > 50 ? post.content.substring(0, 50) + '...' : post.content} <Link className={styles['read-more']} style={{color:'black'}} to={`/post/${post.id}`}>More
-                                    </Link></p></div>
-                                    </div></Link>
+                                    <p className={styles.postContent}>{post.content.length > 50 ? post.content.substring(0, 50) + '...' : post.content} <Link className={styles['read-more']} style={{color:'black'}} to={`/post/${post.id}`}>more
+                                    </Link></p>
+                                    </Link>
 
                                     <div className={styles['button-container']}>
                                     
@@ -141,9 +155,6 @@ const ReadPosts = ({token}) => {
                                           ) : (
                                                 <button className={styles['upvotes-btn']} onClick={() => updateUpvote(post.id)}>{post.upvotes} <BiUpvote/></button>
                                           )}
-
-                                    {post.user_id === token.user.id &&
-                                          <Link to={`/edit/${post.id}`}><button className={styles['edit-btn']}><HiOutlinePencil/></button> </Link>}
                                     </div>
                               </div>
                         ))}

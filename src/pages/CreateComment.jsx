@@ -1,6 +1,6 @@
 import React, { useEffect, useState} from 'react';
 import {supabase} from '../client';
-import './styles/CreateComment.css';
+import styles from './styles/CreateComment.module.css';
 
 
 const CreateComment = ({postId}) => {
@@ -8,7 +8,7 @@ const CreateComment = ({postId}) => {
       const [comment, setComment] = useState('');
       const [user, setUser] = React.useState(null);
       
-      React.useEffect(() => {
+      useEffect(() => {
             const session = supabase.auth.session;
             setUser(session?.user ?? null);
     
@@ -47,14 +47,12 @@ const CreateComment = ({postId}) => {
             console.log('Comment inserted successfully:', comment_data);
             setComment('');
           }
-
-          // redirect to post page
           window.location.href = `/post/${postId}`;
       };
       
 
       return (
-            <div className="create-comment">
+            <div className={styles.createComment}>
               <input
                 type="text"
                 placeholder="Leave a comment..."

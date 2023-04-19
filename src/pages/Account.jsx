@@ -3,13 +3,21 @@ import { supabase } from '../client'
 import styles from './styles/Account.module.css';
 import moment from 'moment';
 import { Link } from 'react-router-dom';
+import { CgProfile } from 'react-icons/cg';
+import { MdPostAdd } from 'react-icons/md';
+import { AiOutlineComment } from 'react-icons/ai';
+import { BsBookmarkCheckFill } from 'react-icons/bs';
+import { SiGooglemessages } from 'react-icons/si';
+import Chat from '../components/Chat';
 
-const Account = () => {
+const Account = ({token}) => {
       const [user, setUser] = useState(null)
       const [posts, setPosts] = useState([])
       const [comments, setComments] = useState([])
       const [selectedOption, setSelectedOption] = useState('profile');
       const [savedPosts, setSavedPosts] = useState([]);
+      const [editUsername, setEditUsername] = useState(false);
+      const [newUsername, setNewUsername] = useState('');
       
       const handleOptionClick = (option) => {
             setSelectedOption(option);
@@ -31,6 +39,27 @@ const Account = () => {
       }, [])
 
       useEffect(() => {
+            const fetchUserData = async () => {
+                  if(user) {
+                  const { data, error } = await supabase
+                  .from('users')
+                  .select('*')
+                  .eq('id', user.id)
+                  .maybeSingle();
+
+                  if (error) console.log('error fetching user data:', error)
+                  else {
+                        setUser(data);
+                  }
+
+            }
+      }
+            fetchUserData().catch(console.error);
+      }, [user])
+
+
+/*
+      useEffect(() => {
             const fetchPosts = async () => {
               if (user) {
                 const { data } = await supabase
@@ -44,8 +73,7 @@ const Account = () => {
             }
           
             fetchPosts().catch(console.error);
-          }, [user])
-          
+          }, [user])   
 
       useEffect(() => {
             const fetchComments = async () => {
@@ -88,31 +116,50 @@ const Account = () => {
       } 
 
             fetchSavedPosts().catch(console.error);   
-      }, [user])          
+      }, [user]) */
+      
+      const updateUsername = async () => {
+            const { data, error } = await supabase
+            .from('users')
+            .update({ username: newUsername })
+            .eq('id', user.id)
+            .single();
 
+            if (error) console.log('error updating username:', error)
+            else {
+                  setUser(data);
+            }
+      }
 
-      if(!user) return (
-            <div className={styles.account}>
-                  <h1>Sign in to view your account</h1>
-                  <Link to='/login'>Login</Link>
-            </div>
-      )
+      const handleEditClick = () => {
+            setEditUsername(true);
+      }
 
-        return (
+      const handleUpdateClick = () => {
+            setEditUsername(false);
+            updateUsername();
+      }
+
+ return (
             <div className={styles.account}>
               <div className={styles.sidebar}>
                 <ul className={styles.accountList}>
                   <li className={`${styles.option} ${selectedOption === 'profile' ? styles.active : ''}`} onClick={() => handleOptionClick('profile')}>
-                  Profile
+                  <span><CgProfile/></span> Profile
+                  </li>
+                  <li
+                  className={`${styles.option} ${selectedOption === 'chats' ? styles.active : ''}`}
+                  onClick={() => handleOptionClick('chats')}>
+                  <span><SiGooglemessages/></span> Chats
                   </li>
                   <li className={`${styles.option} ${selectedOption === 'posts' ? styles.active : ''}`} onClick={() => handleOptionClick('posts')}>
-                  Posts
+                  <span><MdPostAdd/></span>Posts
                   </li>
                   <li className={`${styles.option} ${selectedOption === 'comments' ? styles.active : ''}`} onClick={() => handleOptionClick('comments')}>
-                  Comments
+                  <span><AiOutlineComment/></span>Comments
                   </li>
                   <li className={`${styles.option} ${selectedOption === 'saved' ? styles.active : ''}`} onClick={() => handleOptionClick('saved')}>
-                  Saved
+                  <span><BsBookmarkCheckFill/></span>Saved
                   </li>
                 </ul>
               </div>
@@ -121,9 +168,22 @@ const Account = () => {
                 {selectedOption === 'profile' && (
                   <div className={styles.profile}>
                         <div className={styles.details}>
-                              <p><span>Name:</span> {user.user_metadata.full_name}</p>
-                              <p><span>Email:</span> {user.email}</p>
-                              <p><span>Joined:</span> {moment(user?.created_at).format('MMMM D, YYYY')}</p>
+                              <div className={styles.loginInfo}>
+                              <p><span>Username:</span> {user?.username}</p>
+                              <p><span>Full Name:</span> {user?.fullname}</p>
+                              <p><span>Email:</span> {user?.email}</p>
+                              <p><span>Joined:</span> {moment(token.user.created_at).format('MMMM D, YYYY')}</p>
+                              </div>
+
+                              <div className={styles.editUsername}>
+                              {!editUsername && <button onClick={handleEditClick }>Update User</button>}
+                              {editUsername &&(
+                                    <>
+                               <input type="text" value={newUsername} onChange={(e) => setNewUsername(e.target.value)}
+                               placeholder="Enter new username" /> <button onClick={handleUpdateClick}>Update</button>
+                                    </>
+                              )}
+                              </div>
                               <button onClick={handleLogout}>Sign Out</button>
                         </div>
                   </div>
@@ -136,7 +196,7 @@ const Account = () => {
                               {posts.map((post) => (
                                     <div className={styles.postList} key={post.id}>
                                           <h4>{moment(post.created_at).format('MMMM D, YYYY')}</h4>
-                                          <p>{post.content.length > 100 ? post.content.substring(0, 100) + '...' : post.content} <Link className={styles['read-more']} style={{color:'black'}} to={`/post/${post.id}`}>More
+                                          <p>{post.content.length > 100 ? post.content.substring(0, 100) + '...' : post.content} <Link className={styles['read-more']} style={{color:'teal'}} to={`/post/${post.id}`}>More
                                     </Link></p>
                                           <Link style={{textDecoration: 'none', color: 'white'}} to={`/post/${post.id}`}><button className={styles.viewBtn}> View Post </button></Link>
                                     </div>
@@ -167,7 +227,7 @@ const Account = () => {
                               {savedPosts.map((savedPost) => (
                                     <div className={styles.postList} key={savedPost.id}>
                                           <h2>{savedPost.title}</h2>
-                                          <p>{savedPost.content.length > 100 ? savedPost.content.substring(0, 100) + '...' : savedPost.content} <Link className={styles['read-more']} style={{color:'black'}} to={`/post/${savedPost.id}`}>More
+                                          <p>{savedPost.content.length > 100 ? savedPost.content.substring(0, 100) + '...' : savedPost.content} <Link className={styles['read-more']} style={{color:'teal'}} to={`/post/${savedPost.id}`}>More
                                     </Link></p>
                                           <Link style={{textDecoration: 'none', color: 'white'}} to={`/post/${savedPost.id}`}><button className={styles.viewBtn}> View Post </button></Link>
                                     </div>
@@ -175,7 +235,14 @@ const Account = () => {
                         </div>
                   </div>
                   )}
+
+                  {selectedOption === 'chats' && (
+                        <div className={styles.chats}>
+                              <Chat />
+                        </div>
+                  )}
               </div>
             </div>
 )};
-        export default Account;
+
+export default Account;

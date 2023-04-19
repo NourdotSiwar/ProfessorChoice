@@ -1,20 +1,31 @@
 .postContainer {
+  margin: 0 auto;
+  width: auto;
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
-  margin-top: 5rem;
+  margin-top: 4rem;
+  margin-bottom: 2rem;
 }
-
 .detailedPost {
   width: 600px;
   margin: 0 auto;
   height: auto;
   padding: 20px;
-  border: 1px solid teal;
+  border: 1px solid #2a96a1;
   background-color: #f5f5f5;
   box-shadow: 0 0 10px 0 rgba(0,0,0,0.2);
   border-radius: 10px;
+}
+
+.backBtn{
+  width: 15px;
+  height: 15px;
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+  color: #2a96a1;
+  margin-bottom: 15px;
 }
 
 .postHeader {
@@ -26,17 +37,17 @@
 .postTime {
   margin: 0;
   font-size: 1rem;
-  color: teal;
+  color: #2a96a1;
   font-weight: bold;
 }
 
 .flair{
+  width: 60px;
   color: white;
-  background-color: #f5f5f5;
   border: none;
   border-radius: 5px;
   padding: 5px;
-  font-size: 1.1rem;
+  font-size: 1rem;
   box-shadow: 0 0 10px 0 rgba(0,0,0,0.2);
 }
 
@@ -47,26 +58,39 @@ background-color: #79d1d6 ;
 .opinionFlair {
 background-color: #7798ed;
 }  
-
 .editBtn, .bookmarkBtn{
-  width: 50px;
-  height: 35px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  background-color: teal;
-  font-size: 1rem;
+  background-color: transparent;
+  border: none;
+  font-size: 20px;
   cursor: pointer;
-  color: white;
+  color: #000000;
 }
   
-.editBtn:hover{
-  background-color: #ccc;
-  color: black;
+.editBtn:hover, .bookmarkBtn:hover {
+  color: #2a96a1;
 }
 
 .postTitle {
   margin-top: 20px;
   margin-bottom: 10px;
+}
+
+.postAuthor {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: bold;
+  color: #2a96a1;
+  margin-bottom: 2rem;
+}
+
+.Author{
+  text-decoration: none;
+  color: #2a96a1;
+  font-size: 1rem;
+}
+
+.Author:hover {
+  text-decoration: underline;
 }
 
 .postContent {
@@ -84,3 +108,26 @@ background-color: #7798ed;
   justify-content: center;
   align-items: center;
 }
+
+.upvoteBtn {
+  background-color: transparent;
+  color: #2a96a1;
+  border: none;
+  font-size: 17px;
+  cursor: pointer;
+  width: auto;
+  }
+  
+  .upvoteBtn {
+  width: auto;
+  }
+  
+  .upvoteBtn:hover {
+  color: #333;
+  }
+  
+  .upvoteBtn:disabled {
+  background-color: transparent;
+  cursor: not-allowed;
+  color: #2a96a1;
+  }

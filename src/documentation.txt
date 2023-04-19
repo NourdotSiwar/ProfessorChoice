@@ -30,10 +30,10 @@ fix the following files:
 3. EditPost - DONE
 4. DetailedPost - DONE
 
-* CRUD comments
-1. ReadComments
-2. CreateComments
-3. EditComments
+* CRUD comments -DONE
+1. ReadComments - DONE
+2. CreateComments - DONE
+3. EditComments - DONE
 
 * SignUp/Login - DONE
 * Account - DONE
@@ -45,9 +45,23 @@ credits for word counter: https://codepen.io/geoffbuell/pen/mdREpwM
 dropdown icons: https://react-icons.github.io/react-icons/search?q=arrow
 
 9. Adding # of comments
-icon react: https://react-icons.github.io/react-icons/search?q=vote
+icon react: https://react-icons.github.io/react-icons/search?q=vote 
+
+10. Saved professors
+Utilized Instagram feature of saving posts
+
+11. chat functionality
+* utilized supabase commuity
+* credit: https://reactjsexample.com/a-chat-app-using-reactjs-and-supabase/
+* struggled with letting messages show, utilized project above
+* struggled with getting db to listen to users message
+* struggled with bar scrolling down automatically
+* credit for bar: https://stackoverflow.com/questions/37620694/how-to-scroll-to-bottom-in-react
+* credit for bar behavior: https://developer.mozilla.org/en-US/docs/Web/API/Element/scrollIntoView
+* struggled with only showing conversations with users that alr conversed with the current user
 
 
-
-
-
+12 Design:
+https://www.befunky.com/create/blur-image/
+https://imagecolorpicker.com/en
+https://www.sessions.edu/color-calculator/

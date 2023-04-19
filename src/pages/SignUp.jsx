@@ -25,25 +25,31 @@ const SignUp = () => {
 
       async function handleSubmit(e) {
             e.preventDefault();
+        
+            const { user, session, error } = await supabase.auth.signUp({
+                  email: formData.email,
+                  password: formData.password,
+            })
 
-            try {
-                  const { error } = await supabase.auth.signUp(
-                    {
-                      email: formData.email,
-                      password: formData.password,
-                      options: {
-                        data: {
-                          full_name: formData.fullName,
-                        }
-                      }
-                    }
-                  )
-                  if (error) throw error
-                  alert('Check your email for verification link')
+            if (error) {
+                  console.log(error)
+                  return
             }
-            catch(error) {
-                  console.error(error);
-            }    
+
+            const { data, error: errorUpdate } = await supabase
+            .from('users')
+            .insert([
+              {
+                id: user.id,
+                userName: formData.userName,
+                full_name: formData.fullName,
+              }
+            ])
+
+            if (errorUpdate) {
+              console.log(errorUpdate)
+              return
+            }
       }      
   
 
@@ -51,6 +57,13 @@ const SignUp = () => {
     <div className={styles.container}>
     <h1 className={styles.heading}>Sign Up</h1>
             <form onSubmit={handleSubmit}>
+
+                  <input 
+                  placeholder='user name'
+                  name='userName'
+                  onChange={handleChange}
+                  className={styles.input}
+                  />
 
                   <input 
                   placeholder='full name'
@@ -76,7 +89,7 @@ const SignUp = () => {
 
                   <button className={styles.signupBtn} type='submit'>Sign Up</button>
             </form>
-            Already have an account? <Link to='/'>Login</Link>
+           <p> Already have an account? <Link style={{color:'#2a96a1'}} to='/'>Login</Link></p>
       </div>
 
       

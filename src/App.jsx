@@ -12,6 +12,7 @@ import ReadComments from './pages/ReadComments'
 import CreateComment from './pages/CreateComment'
 import EditComment from './pages/EditComment'
 import NavigationBar from './components/NavigationBar'
+import Profile from './pages/Profile'
 
 
 function App() {
@@ -45,14 +46,13 @@ function App() {
     },
     {
     path: '/create',
-    element: token ? <CreatePost token={token}
-    userId={user?.id}
+    element: token ? <CreatePost userId={user?.id}
     />
       : <Login setToken={setToken}/>
     },
     {
     path: '/edit/:id',
-    element: <EditPost token={token}/>
+    element: <EditPost/>
     },
     {
     path: '/account',
@@ -73,18 +73,20 @@ function App() {
     },
     {
     path: '/post/:id',
-    element: <ReadComments token={token}
-    postId={user?.id} />
+    element: <ReadComments token={token} />
     },
     {
     path: '/editComment/:id',
-    element: <EditComment postId={user?.id} />
+    element: <EditComment />
     },
     {
     path: '/post/:id',
-    element: <CreateComment token={token}
-    postId={user?.id}/>
+    element: <CreateComment/>
     },
+    {
+    path: '/profile/:user_id',
+    element: <Profile/>
+    }
     ]);
 
 
