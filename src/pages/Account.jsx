@@ -10,6 +10,7 @@ import { BsBookmarkCheckFill } from 'react-icons/bs';
 import { SiGooglemessages } from 'react-icons/si';
 import Chat from '../components/Chat';
 
+
 const Account = ({token}) => {
       const [user, setUser] = useState(null)
       const [posts, setPosts] = useState([])
@@ -23,42 +24,27 @@ const Account = ({token}) => {
             setSelectedOption(option);
       };
 
-      const handleLogout = () => {
-            sessionStorage.removeItem('token');
-            window.location.reload();
-      }
-
+      // fetch username, fullname, and email from users table
       useEffect(() => {
-            const { data: authListener } = supabase.auth.onAuthStateChange(async (event, session) => {
-                  setUser(session?.user ?? null)
-            })
-
-            return () => {
-                  authListener.unsubscribe
-            }
-      }, [])
-
-      useEffect(() => {
-            const fetchUserData = async () => {
-                  if(user) {
+            const fetchUser = async () => {
                   const { data, error } = await supabase
                   .from('users')
                   .select('*')
-                  .eq('id', user.id)
-                  .maybeSingle();
+                  .eq('id', token.user.id)
+                  .single();
 
-                  if (error) console.log('error fetching user data:', error)
+                  if (error) console.log('error fetching user:', error)
                   else {
                         setUser(data);
+                        //console.log(data)
                   }
-
             }
-      }
-            fetchUserData().catch(console.error);
-      }, [user])
 
+            fetchUser().catch(console.error);
+      }, [token.user.id])
+          
+      
 
-/*
       useEffect(() => {
             const fetchPosts = async () => {
               if (user) {
@@ -69,6 +55,7 @@ const Account = ({token}) => {
                   .order('created_at', { ascending: false })
           
                 setPosts(data)
+                console.log(data)
               }
             }
           
@@ -116,18 +103,18 @@ const Account = ({token}) => {
       } 
 
             fetchSavedPosts().catch(console.error);   
-      }, [user]) */
+      }, [user]) 
       
       const updateUsername = async () => {
-            const { data, error } = await supabase
+            const { error } = await supabase
             .from('users')
             .update({ username: newUsername })
-            .eq('id', user.id)
-            .single();
+            .eq('id', token.user.id)
 
             if (error) console.log('error updating username:', error)
             else {
-                  setUser(data);
+                  setUser({ ...user, username: newUsername });
+                  setNewUsername('');
             }
       }
 
@@ -138,6 +125,11 @@ const Account = ({token}) => {
       const handleUpdateClick = () => {
             setEditUsername(false);
             updateUsername();
+      }
+
+      const handleLogout = () => {
+            sessionStorage.removeItem('token');
+            window.location.reload();
       }
 
  return (
@@ -191,7 +183,7 @@ const Account = ({token}) => {
 
                 {selectedOption === 'posts' && (
                   <div className={styles.posts}>
-                        <p className={styles.postCount}>Total: <span>{posts.length}</span> posts</p>
+                        <p style={{color:'white'}} className={styles.postCount}>Total: <span>{posts.length}</span> posts</p>
                         <div className={styles.details}>
                               {posts.map((post) => (
                                     <div className={styles.postList} key={post.id}>
@@ -208,9 +200,9 @@ const Account = ({token}) => {
             {selectedOption === 'comments' && (
                   <div className={styles.comments}>
                         <div className={styles.details}>
-                        <p className={styles.commentCount}>Total: <span>{comments.length}</span> comments</p>
-                              {comments.map((comment) => (
-                                    <div className={styles.commentList} key={comment.id}>
+                        <p style={{color:'white'}}  className={styles.commentCount}>Total: <span>{comments.length}</span> comments</p>
+                              {comments.map((comment, index) => (
+                                    <div className={styles.commentList} key={index}>
                                           <h4>{moment(comment.created_at).format('MMMM D, YYYY')}</h4>
                                           <p>{comment.comment_content.length > 100 ? comment.comment_content.substring(0, 100) + '...' : comment.comment_content}</p>
                                           <Link style={{textDecoration: 'none', color: 'white'}} to={`/post/${comment.post_id}`}><button className={styles.viewBtn}> View Comment </button></Link>
@@ -222,7 +214,7 @@ const Account = ({token}) => {
 
                 {selectedOption === 'saved' && (
                   <div className={styles.saved}>
-                        <p className={styles.postCount}>Total: <span>{savedPosts.length}</span> saved posts</p>
+                        <p style={{color:'white'}}  className={styles.postCount}>Total: <span>{savedPosts.length}</span> saved posts</p>
                         <div className={styles.details}>
                               {savedPosts.map((savedPost) => (
                                     <div className={styles.postList} key={savedPost.id}>
