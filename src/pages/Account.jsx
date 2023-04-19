@@ -46,6 +46,27 @@ const Account = ({token}) => {
       
 
       useEffect(() => {
+            const fetchUserData = async () => {
+                  if(user) {
+                  const { data, error } = await supabase
+                  .from('users')
+                  .select('*')
+                  .eq('id', user.id)
+                  .maybeSingle();
+
+                  if (error) console.log('error fetching user data:', error)
+                  else {
+                        setUser(data);
+                  }
+
+            }
+      }
+            fetchUserData().catch(console.error);
+      }, [user])
+
+
+
+      useEffect(() => {
             const fetchPosts = async () => {
               if (user) {
                 const { data } = await supabase
@@ -103,6 +124,7 @@ const Account = ({token}) => {
       } 
 
             fetchSavedPosts().catch(console.error);   
+<<<<<<< HEAD
       }, [user]) 
       
       const updateUsername = async () => {
@@ -115,6 +137,20 @@ const Account = ({token}) => {
             else {
                   setUser({ ...user, username: newUsername });
                   setNewUsername('');
+=======
+      }, [user])     
+      
+      const updateUsername = async () => {
+            const { data, error } = await supabase
+            .from('users')
+            .update({ username: newUsername })
+            .eq('id', user.id)
+            .single();
+
+            if (error) console.log('error updating username:', error)
+            else {
+                  setUser(data);
+>>>>>>> 72e85c056f0cb217e3508ab824683535961a358a
             }
       }
 
@@ -127,11 +163,14 @@ const Account = ({token}) => {
             updateUsername();
       }
 
+<<<<<<< HEAD
       const handleLogout = () => {
             sessionStorage.removeItem('token');
             window.location.reload();
       }
 
+=======
+>>>>>>> 72e85c056f0cb217e3508ab824683535961a358a
  return (
             <div className={styles.account}>
               <div className={styles.sidebar}>
@@ -160,6 +199,7 @@ const Account = ({token}) => {
                 {selectedOption === 'profile' && (
                   <div className={styles.profile}>
                         <div className={styles.details}>
+<<<<<<< HEAD
                               <div className={styles.loginInfo}>
                               <p><span>Username:</span> {user?.username}</p>
                               <p><span>Full Name:</span> {user?.fullname}</p>
@@ -176,7 +216,24 @@ const Account = ({token}) => {
                                     </>
                               )}
                               </div>
+=======
+                                 
+                              <p><span>Username:</span> {user?.username}</p>
+                              <p><span>Full Name:</span> {user?.fullname}</p>
+                              <p><span>Email:</span> {user?.email}</p>
+                              <p><span>Joined:</span> {moment(user?.created_at).format('MMMM D, YYYY')}</p>
+>>>>>>> 72e85c056f0cb217e3508ab824683535961a358a
                               <button onClick={handleLogout}>Sign Out</button>
+
+                              <div className={styles.editUsername}>
+                              {!editUsername && <button onClick={handleEditClick }>Update User</button>}
+                              {editUsername &&(
+                                    <>
+                               <input type="text" value={newUsername} onChange={(e) => setNewUsername(e.target.value)}
+                               placeholder="Enter new username" /> <button onClick={handleUpdateClick}>Update</button>
+                                    </>
+                              )}
+                              </div>
                         </div>
                   </div>
                 )}

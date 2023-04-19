@@ -4,8 +4,12 @@
   display: flex;
   justify-content: center;
   align-items: center;
+<<<<<<< HEAD
   margin-top: 4rem;
   margin-bottom: 2rem;
+=======
+  margin-top: 5rem;
+>>>>>>> 72e85c056f0cb217e3508ab824683535961a358a
 }
 .detailedPost {
   width: 600px;
@@ -24,7 +28,11 @@
   border: none;
   font-size: 1.2rem;
   cursor: pointer;
+<<<<<<< HEAD
   color: #2a96a1;
+=======
+  color: teal;
+>>>>>>> 72e85c056f0cb217e3508ab824683535961a358a
   margin-bottom: 15px;
 }
 
@@ -67,7 +75,11 @@ background-color: #7798ed;
 }
   
 .editBtn:hover, .bookmarkBtn:hover {
+<<<<<<< HEAD
   color: #2a96a1;
+=======
+  color: teal;
+>>>>>>> 72e85c056f0cb217e3508ab824683535961a358a
 }
 
 .postTitle {
@@ -79,13 +91,21 @@ background-color: #7798ed;
   margin: 0;
   font-size: 1rem;
   font-weight: bold;
+<<<<<<< HEAD
   color: #2a96a1;
+=======
+  color: teal;
+>>>>>>> 72e85c056f0cb217e3508ab824683535961a358a
   margin-bottom: 2rem;
 }
 
 .Author{
   text-decoration: none;
+<<<<<<< HEAD
   color: #2a96a1;
+=======
+  color: teal;
+>>>>>>> 72e85c056f0cb217e3508ab824683535961a358a
   font-size: 1rem;
 }
 
@@ -111,7 +131,11 @@ background-color: #7798ed;
 
 .upvoteBtn {
   background-color: transparent;
+<<<<<<< HEAD
   color: #2a96a1;
+=======
+  color: teal;
+>>>>>>> 72e85c056f0cb217e3508ab824683535961a358a
   border: none;
   font-size: 17px;
   cursor: pointer;
@@ -129,5 +153,9 @@ background-color: #7798ed;
   .upvoteBtn:disabled {
   background-color: transparent;
   cursor: not-allowed;
+<<<<<<< HEAD
   color: #2a96a1;
+=======
+  color: teal;
+>>>>>>> 72e85c056f0cb217e3508ab824683535961a358a
   }

@@ -59,6 +59,13 @@ Utilized Instagram feature of saving posts
 * credit for bar: https://stackoverflow.com/questions/37620694/how-to-scroll-to-bottom-in-react
 * credit for bar behavior: https://developer.mozilla.org/en-US/docs/Web/API/Element/scrollIntoView
 * struggled with only showing conversations with users that alr conversed with the current user
+<<<<<<< HEAD
+=======
+
+
+
+
+>>>>>>> 72e85c056f0cb217e3508ab824683535961a358a
 
 
 12 Design:
