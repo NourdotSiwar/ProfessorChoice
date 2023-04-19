@@ -10,7 +10,8 @@ import { BsBookmarkCheckFill } from 'react-icons/bs';
 import { SiGooglemessages } from 'react-icons/si';
 import Chat from '../components/Chat';
 
-const Account = () => {
+
+const Account = ({token}) => {
       const [user, setUser] = useState(null)
       const [posts, setPosts] = useState([])
       const [comments, setComments] = useState([])
@@ -23,20 +24,26 @@ const Account = () => {
             setSelectedOption(option);
       };
 
-      const handleLogout = () => {
-            sessionStorage.removeItem('token');
-            window.location.reload();
-      }
-
+      // fetch username, fullname, and email from users table
       useEffect(() => {
-            const { data: authListener } = supabase.auth.onAuthStateChange(async (event, session) => {
-                  setUser(session?.user ?? null)
-            })
+            const fetchUser = async () => {
+                  const { data, error } = await supabase
+                  .from('users')
+                  .select('*')
+                  .eq('id', token.user.id)
+                  .single();
 
-            return () => {
-                  authListener.unsubscribe
+                  if (error) console.log('error fetching user:', error)
+                  else {
+                        setUser(data);
+                        //console.log(data)
+                  }
             }
-      }, [])
+
+            fetchUser().catch(console.error);
+      }, [token.user.id])
+          
+      
 
       useEffect(() => {
             const fetchUserData = async () => {
@@ -69,6 +76,7 @@ const Account = () => {
                   .order('created_at', { ascending: false })
           
                 setPosts(data)
+                console.log(data)
               }
             }
           
@@ -116,6 +124,20 @@ const Account = () => {
       } 
 
             fetchSavedPosts().catch(console.error);   
+<<<<<<< HEAD
+      }, [user]) 
+      
+      const updateUsername = async () => {
+            const { error } = await supabase
+            .from('users')
+            .update({ username: newUsername })
+            .eq('id', token.user.id)
+
+            if (error) console.log('error updating username:', error)
+            else {
+                  setUser({ ...user, username: newUsername });
+                  setNewUsername('');
+=======
       }, [user])     
       
       const updateUsername = async () => {
@@ -128,6 +150,7 @@ const Account = () => {
             if (error) console.log('error updating username:', error)
             else {
                   setUser(data);
+>>>>>>> 72e85c056f0cb217e3508ab824683535961a358a
             }
       }
 
@@ -140,6 +163,14 @@ const Account = () => {
             updateUsername();
       }
 
+<<<<<<< HEAD
+      const handleLogout = () => {
+            sessionStorage.removeItem('token');
+            window.location.reload();
+      }
+
+=======
+>>>>>>> 72e85c056f0cb217e3508ab824683535961a358a
  return (
             <div className={styles.account}>
               <div className={styles.sidebar}>
@@ -168,11 +199,30 @@ const Account = () => {
                 {selectedOption === 'profile' && (
                   <div className={styles.profile}>
                         <div className={styles.details}>
+<<<<<<< HEAD
+                              <div className={styles.loginInfo}>
+                              <p><span>Username:</span> {user?.username}</p>
+                              <p><span>Full Name:</span> {user?.fullname}</p>
+                              <p><span>Email:</span> {user?.email}</p>
+                              <p><span>Joined:</span> {moment(token.user.created_at).format('MMMM D, YYYY')}</p>
+                              </div>
+
+                              <div className={styles.editUsername}>
+                              {!editUsername && <button onClick={handleEditClick }>Update User</button>}
+                              {editUsername &&(
+                                    <>
+                               <input type="text" value={newUsername} onChange={(e) => setNewUsername(e.target.value)}
+                               placeholder="Enter new username" /> <button onClick={handleUpdateClick}>Update</button>
+                                    </>
+                              )}
+                              </div>
+=======
                                  
                               <p><span>Username:</span> {user?.username}</p>
                               <p><span>Full Name:</span> {user?.fullname}</p>
                               <p><span>Email:</span> {user?.email}</p>
                               <p><span>Joined:</span> {moment(user?.created_at).format('MMMM D, YYYY')}</p>
+>>>>>>> 72e85c056f0cb217e3508ab824683535961a358a
                               <button onClick={handleLogout}>Sign Out</button>
 
                               <div className={styles.editUsername}>
@@ -190,7 +240,7 @@ const Account = () => {
 
                 {selectedOption === 'posts' && (
                   <div className={styles.posts}>
-                        <p className={styles.postCount}>Total: <span>{posts.length}</span> posts</p>
+                        <p style={{color:'white'}} className={styles.postCount}>Total: <span>{posts.length}</span> posts</p>
                         <div className={styles.details}>
                               {posts.map((post) => (
                                     <div className={styles.postList} key={post.id}>
@@ -207,9 +257,9 @@ const Account = () => {
             {selectedOption === 'comments' && (
                   <div className={styles.comments}>
                         <div className={styles.details}>
-                        <p className={styles.commentCount}>Total: <span>{comments.length}</span> comments</p>
-                              {comments.map((comment) => (
-                                    <div className={styles.commentList} key={comment.id}>
+                        <p style={{color:'white'}}  className={styles.commentCount}>Total: <span>{comments.length}</span> comments</p>
+                              {comments.map((comment, index) => (
+                                    <div className={styles.commentList} key={index}>
                                           <h4>{moment(comment.created_at).format('MMMM D, YYYY')}</h4>
                                           <p>{comment.comment_content.length > 100 ? comment.comment_content.substring(0, 100) + '...' : comment.comment_content}</p>
                                           <Link style={{textDecoration: 'none', color: 'white'}} to={`/post/${comment.post_id}`}><button className={styles.viewBtn}> View Comment </button></Link>
@@ -221,7 +271,7 @@ const Account = () => {
 
                 {selectedOption === 'saved' && (
                   <div className={styles.saved}>
-                        <p className={styles.postCount}>Total: <span>{savedPosts.length}</span> saved posts</p>
+                        <p style={{color:'white'}}  className={styles.postCount}>Total: <span>{savedPosts.length}</span> saved posts</p>
                         <div className={styles.details}>
                               {savedPosts.map((savedPost) => (
                                     <div className={styles.postList} key={savedPost.id}>

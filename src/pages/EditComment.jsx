@@ -75,7 +75,11 @@ const EditComment = ({postId, token, comment}) => {
             <div className={styles.comment}>
             <div className={styles.commentHeader}>
               <div className={styles.commentInfo}>
+<<<<<<< HEAD
+                <p style={{fontWeight: 'bold'}}>Posted {moment(comment.created_at).fromNow()}</p>
+=======
                 <p>Posted {moment(comment.created_at).fromNow()}</p>
+>>>>>>> 72e85c056f0cb217e3508ab824683535961a358a
                 <div className={styles.commentActions}>
                 {comment.user_id === token.user.id && (
                   <>
@@ -86,7 +90,11 @@ const EditComment = ({postId, token, comment}) => {
                         <button onClick={handleCancelClick}><GiCancel/></button>
                       </>
                     )}
+<<<<<<< HEAD
+                    <button className={styles.trashBtn} onClick={handleDeleteClick}><MdDelete/></button>
+=======
                     <button onClick={handleDeleteClick}><MdDelete/></button>
+>>>>>>> 72e85c056f0cb217e3508ab824683535961a358a
                     </>
                 )}
                 <Report/>

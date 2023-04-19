@@ -1,6 +1,10 @@
 import React, { useState, useEffect, useRef } from "react";
 import { supabase } from "../client";
 import styles from "./styles/Chat.module.css";
+<<<<<<< HEAD
+import { FiSend } from "react-icons/fi";
+=======
+>>>>>>> 72e85c056f0cb217e3508ab824683535961a358a
 
 const Chat = () => {
       const [messages, setMessages] = useState([]);
@@ -11,6 +15,10 @@ const Chat = () => {
       const[selectedConversation, setSelectedConversation] = useState(null)
       const messagesEndRef = React.createRef()
 
+<<<<<<< HEAD
+      /*
+=======
+>>>>>>> 72e85c056f0cb217e3508ab824683535961a358a
       useEffect(() => {
         messagesEndRef.current?.scrollIntoView({ behavior: "smooth" })
       }, [messages])
@@ -96,7 +104,13 @@ const Chat = () => {
           console.log('error fetching messages:', error);
           console.log(otherUserId)
         } else {
+<<<<<<< HEAD
+          
           setMessages(messages);
+          console.log(messages)
+=======
+          setMessages(messages);
+>>>>>>> 72e85c056f0cb217e3508ab824683535961a358a
         }
       };
         
@@ -140,10 +154,18 @@ const Chat = () => {
           };
           fetchConversations().catch(console.error);
         }, [user]);
+<<<<<<< HEAD
+        */
+
+      return (
+        <div className={styles.chatDiv}>
+          {/*
+=======
         
 
       return (
         <div className={styles.chatDiv}>
+>>>>>>> 72e85c056f0cb217e3508ab824683535961a358a
           <div className={styles.sideChats}>
             <div className={styles.conversations}>
               {conversations.map((conversation) => (
@@ -178,6 +200,17 @@ const Chat = () => {
                 ))}
               </div>
               <div className={styles.input}>
+<<<<<<< HEAD
+                <textarea
+                  className={styles.textarea}
+                  placeholder="Type a message..."
+                  value={content}
+                  onChange={(e) => setMessage({content: e.target.value})}
+                />
+                  <button onClick={createMessage}><FiSend/></button>
+                </div>
+                    </div>*/}
+=======
                 <input
                   type="text"
                   placeholder="Type a message"
@@ -187,6 +220,7 @@ const Chat = () => {
                   <button onClick={createMessage}>Send</button>
                 </div>
               </div>
+>>>>>>> 72e85c056f0cb217e3508ab824683535961a358a
             </div>
     );          
 };

@@ -89,7 +89,7 @@ const SignUp = () => {
 
                   <button className={styles.signupBtn} type='submit'>Sign Up</button>
             </form>
-            Already have an account? <Link to='/'>Login</Link>
+           <p> Already have an account? <Link style={{color:'#2a96a1'}} to='/'>Login</Link></p>
       </div>
 
       

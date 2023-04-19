@@ -70,8 +70,8 @@ const Login = ({setToken}) => {
                   <button className={styles.loginBtn} type='submit'>Login</button>
                   
             </form>
-            Don't have an account? <Link to='/signup'>Sign Up</Link>
-           
+           <p> Don't have an account? <Link  style={{color:'#2a96a1'}} to='/signup'>Sign Up</Link></p>
+           <p>Forgot your password? <Link style={{color:'#2a96a1'}} to='/reset'>Reset Password</Link></p>           
             
       </div>
 

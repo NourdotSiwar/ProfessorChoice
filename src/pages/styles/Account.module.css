@@ -6,9 +6,9 @@
     }
     
     .sidebar {
-      border-bottom: 1px solid teal;
+      border-bottom: 1px solid white;
       width: 70%;
-      color: teal;
+      color: white;
       font-weight: bold;
       position: absolute;
       left: 50%;
@@ -36,6 +36,8 @@
       margin-right: 0.5rem;
     }
     .option.active {
+      /* rgb for #2a96a1 is 42, 150, 161
+      */
       background-color: #ccc;
       border-radius: 0.5rem;
     }
@@ -44,7 +46,18 @@
       background-color: #ccc;
       transition: all 0.3s ease-in-out;
       border-radius: 0.5rem;
+      color: black;
     }
+
+    .option:hover span{
+      color: black;
+    }
+
+    /*font black when selected*/
+    .option.active{
+      color: black;
+    }
+
     
   
     .content {
@@ -62,12 +75,23 @@
       font-weight: bold;
     }
     
+    .profile {
+      background-color: #f5f5f5;
+      padding: 1rem;
+      border-radius: 0.5rem;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+      margin-bottom: 2rem;
+      width: 30rem;
+      height: 20rem;
+      margin-top: 2rem;
+      
+    }
     .profile button {
       margin-top: 1rem;
       padding: 0.5rem 1rem;
       border: none;
       border-radius: 0.5rem;
-      background-color: teal;
+      background-color: #2a96a1;
       color: #fff;
       cursor: pointer;
       font-size: 1rem;
@@ -75,9 +99,36 @@
     
     .profile button:hover {
       background-color: #ccc;
-      color: teal;
+      color: #2a96a1;
+    }    
+
+    .loginInfo{
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      margin-left: 7rem;
     }
-    
+
+    .editUsername input{
+      margin-top: 1rem;
+      padding: 0.5rem 1rem;
+      border: none;
+      border-radius: 0.5rem;
+      background-color: #2a96a1;
+      color: #fff;
+      cursor: pointer;
+      font-size: 1rem;
+    }
+
+    .editUsername input::placeholder{
+      color: #fff;
+    }
+
+    .posts, .comments, .saved{
+      height: 100%;
+      margin-bottom: 2rem;
+    }
+
   .commentList, .postList{
       background-color: #f5f5f5;
       padding: 1rem;
@@ -101,7 +152,7 @@
     padding: 0.5rem 1rem;
     border: none;
     border-radius: 0.5rem;
-    background-color: teal;
+    background-color: #2a96a1;
     color: #fff;
     cursor: pointer;
     font-size: 1rem;
@@ -109,7 +160,11 @@
 
   .viewBtn:hover {
     background-color: #ccc;
+<<<<<<< HEAD
+    color: #2a96a1;
+=======
     color: teal;
+>>>>>>> 72e85c056f0cb217e3508ab824683535961a358a
   }
 
   .read-more{

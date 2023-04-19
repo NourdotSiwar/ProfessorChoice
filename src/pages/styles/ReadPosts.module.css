@@ -1,14 +1,16 @@
 .posts-section{
 display: flex;
 flex-direction: column;
-margin-top: 50px;
+margin-top: 60px;
+margin-bottom: 60px;
+color: white;
 }
 
 .welcome-message {
-  font-size: 24px;
+  font-size: 2rem;
   font-weight: bold;
-  margin: 20px 0;
-  color: #333;
+  margin: 20px 0px;
+  color: white;
   text-align: center;
   text-transform: capitalize;
 }
@@ -23,9 +25,10 @@ margin-top: 20px;
 .search-bar input[type="text"] {
 border: none;
 padding: 10px;
-font-size: 16px;
+padding-left: 20px;
+font-size: 1rem;
 width: 100%;
-max-width: 400px;
+max-width: 300px;
 border-radius: 25px;
 box-shadow: 0px 3px 15px rgba(0,0,0,0.2);
 transition: all 0.3s ease-in-out;
@@ -35,40 +38,47 @@ color: #333;
 
 .search-bar input[type="text"]:focus {
 outline: none;
+<<<<<<< HEAD
+box-shadow: 0px 8px 15px rgba(0,0,0,0.4);
+=======
 box-shadow: 0px 3px 15px rgba(0,0,0,0.4);
+>>>>>>> 72e85c056f0cb217e3508ab824683535961a358a
 }
 
 .clear-btn {
-background-color: teal;
-color: white;
+background-color: white;
+color: #2a96a1;
 border: none;
 padding: 10px;
-font-size: 16px;
+font-size: 1rem;
+width: 5rem;
 cursor: pointer;
 border-radius: 20px;
 margin: 5px;
+box-shadow: 0px 3px 15px rgba(0,0,0,0.2);
 }
 
 .clear-btn:hover {
-background-color: #e6e6e6;
+background-color: white;
 color: #333;
 }
 
 .order-by-container button, 
 .filter-container button {
-background-color: teal;
-color: white;
+background-color: white;
+color: #2a96a1;
 border: none;
 padding: 5px 10px;
 font-size: 16px;
 cursor: pointer;
 border-radius: 5px;
 margin: 5px;
+box-shadow: 0px 3px 15px rgba(0,0,0,0.2);
 }
 
 .order-by-container button:hover,
 .filter-container button:hover {
-background-color: #e6e6e6;
+background-color: white;
 color:#333;
 }
 
@@ -76,7 +86,7 @@ color:#333;
 .filter-container button:disabled {
 background-color: #d3d3d3;
 cursor: not-allowed;
-color: teal;
+color: #2a96a1;
 }
 
 .order-by-container {
@@ -102,17 +112,18 @@ justify-content: center;
 background-color: #f5f5f5;
 padding: 1rem;
 border-radius: 0.5rem;
-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+box-shadow: 0 4px 4px rgba(0, 0, 0, 0.2);
 margin-bottom: 2rem;
 width: 20rem;
 margin-top: 40px;
 margin-left: 10px;
 margin-right: 10px;
 margin-bottom: 0px;
+transition: all 0.3s ease-in-out;
 }
 
 .post:hover{
-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+box-shadow: 0 8px 4px rgba(0, 0, 0, 0.4);
 }
 
 .post h3 {
@@ -139,13 +150,21 @@ margin-bottom: 0.5rem;
 }
 
 .edit-btn:hover {
+<<<<<<< HEAD
+  color:#2a96a1;
+=======
   color: teal;
+>>>>>>> 72e85c056f0cb217e3508ab824683535961a358a
 }
 
 
 .time{
 font-size: 0.9rem;
 font-weight: bold;
+<<<<<<< HEAD
+color: black;
+=======
+>>>>>>> 72e85c056f0cb217e3508ab824683535961a358a
 }
 
 .flair {
@@ -194,7 +213,11 @@ padding-top: 10px;
 }
 
 .upvotes-btn, .comments-btn {
+<<<<<<< HEAD
+background-color:#2a96a1;
+=======
 background-color: teal;
+>>>>>>> 72e85c056f0cb217e3508ab824683535961a358a
 color: white;
 border: none;
 padding: 7px 10px;
@@ -215,5 +238,5 @@ color: #333;
 .upvotes-btn:disabled {
 background-color: #d3d3d3;
 cursor: not-allowed;
-color: teal;
+color: #2a96a1;
 }
