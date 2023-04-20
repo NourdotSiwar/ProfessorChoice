@@ -157,7 +157,7 @@ const Account = ({token}) => {
 
       const handleLogout = () => {
             sessionStorage.removeItem('token');
-            window.location.reload();
+            window.location.href = '/';
       }
 
       useEffect(() => {
