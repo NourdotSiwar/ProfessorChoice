@@ -59,7 +59,7 @@ GIF created with ...  LiceCap!
 
 ## Notes
 
-* 1. Authnetication
+1. Authnetication
 * Struggled with signing and loggin in when my supabase version was different than other tutorials' versions, solved the issue by finding a tutorial that was using the same version as me.
 * Credits: https://www.youtube.com/playlist?list=PLl6EcvA_AoxEU455Yi1JoYVwHfpHpNkAw
 
