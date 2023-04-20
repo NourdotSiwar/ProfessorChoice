@@ -24,11 +24,14 @@
 }
 
 .chatDiv{
-    display: flex;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    height: 85vh;
+
 }
 
 .sideChats{
-    margin-top: 2rem;
     width: 10rem;
     height: 20rem;
     padding: 10px;
@@ -46,6 +49,13 @@
     color: #2a96a1;
 }
 
+/* if conversation is clicked make .conversation darker*/
+.conversation:hover{
+    transition: 0.5s;
+    background-color: #2a96a1;
+    color: white;
+}
+
 .container {
     height: 20rem;
     width: 30rem;
@@ -59,9 +69,6 @@
     justify-content: space-between;
     align-items: center;
     padding: 10px;
-    margin-bottom: 2rem;
-    margin-top: 2rem;
-
 }
 
 .form {
@@ -156,9 +163,4 @@
     justify-content: center;
     align-items: center;
     background: #2a96a1;
-}
-.input button:hover {
-    cursor: pointer;
-    color: black;
-    background-color: #ccc;
 }

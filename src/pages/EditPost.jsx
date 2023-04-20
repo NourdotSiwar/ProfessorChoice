@@ -19,12 +19,14 @@ const EditPost = () => {
                   .eq('id', id)
 
                   setPost(data[0]);
+                  console.log(id)
             }
             fetchPost().catch(console.error);
       }, [id]);
 
       useEffect(() => {
             setCharCount(post?.content?.length || 0);
+          //  console.log(post)
           }, [post]);
 
       const updatePost = async (e) => {

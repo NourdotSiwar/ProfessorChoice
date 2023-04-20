@@ -77,20 +77,16 @@ background-color: #7798ed;
 
 .postAuthor {
   margin: 0;
-  font-size: 1rem;
   font-weight: bold;
   color: #2a96a1;
   margin-bottom: 2rem;
 }
 
-.Author{
-  text-decoration: none;
-  color: #2a96a1;
+.postAuthorName {
+  margin: 0;
+  font-weight: bold;
+  color: black;
   font-size: 1rem;
-}
-
-.Author:hover {
-  text-decoration: underline;
 }
 
 .postContent {

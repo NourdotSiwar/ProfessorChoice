@@ -1,9 +1,11 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import { supabase } from "../client";
 import styles from "./styles/Chat.module.css";
 import { FiSend } from "react-icons/fi";
+import { useParams } from "react-router-dom";
 
-const Chat = () => {
+
+const Chat = ({token}) => {
       const [messages, setMessages] = useState([]);
       const [message, setMessage] = useState({content: ''});
       const {content} = message;
@@ -11,41 +13,31 @@ const Chat = () => {
       const[conversations, setConversations] = useState([])
       const[selectedConversation, setSelectedConversation] = useState(null)
       const messagesEndRef = React.createRef()
+      const { user_id } = useParams();
 
-      /*
       useEffect(() => {
         messagesEndRef.current?.scrollIntoView({ behavior: "smooth" })
+        //console.log(messages)
       }, [messages])
 
       useEffect(() => {
-              const { data: authListener } = supabase.auth.onAuthStateChange(async (event, session) => {
-                    setUser(session?.user ?? null)
-              })
-
-              return () => {
-                    authListener.unsubscribe
-              }
-        }, [])
-
-      useEffect(() => {
-          const fetchUserData = async () => {
-                if(user) {
-                const { data, error } = await supabase
-                .from('users')
-                .select('*')
-                .eq('id', user.id)
-                .maybeSingle();
-
-                if (error) console.log('error fetching user data:', error)
-                else {
-                      setUser(data);
-                }
-
+        if (!token || !token.user) return;
+        const fetchUser = async () => {
+          const { data, error } = await supabase
+            .from('users')
+            .select('*')
+            .eq('id', token.user.id)
+            .single();
+      
+          if (error) console.log('error fetching user:', error);
+          else {
+            setUser(data);
+            //console.log(data)
           }
-      }
-          fetchUserData().catch(console.error);
-      }, [user])
-
+        };
+      
+        fetchUser();
+      }, [token]);
 
       useEffect(() => {
               const profiles = supabase
@@ -70,7 +62,6 @@ const Chat = () => {
             }, []);
 
       const createMessage = async () => {
-        const { data, error } =
         await supabase
         .from("messages")
         .insert([
@@ -92,13 +83,11 @@ const Chat = () => {
           .select('*')
           .or(`receiver_id.eq.${user.id}, sender_id.eq.${user.id}`)
           .or(`receiver_id.eq.${otherUserId}, sender_id.eq.${otherUserId}`)
-
           .order('created_at', { ascending: true })
+
         if (error) {
           console.log('error fetching messages:', error);
-          console.log(otherUserId)
         } else {
-          
           setMessages(messages);
           console.log(messages)
         }
@@ -139,20 +128,20 @@ const Chat = () => {
                   }
                 }
                 setConversations(newConversations);
+                //console.log(user)
               }
             }
           };
           fetchConversations().catch(console.error);
         }, [user]);
-        */
+
 
       return (
         <div className={styles.chatDiv}>
-          {/*
           <div className={styles.sideChats}>
             <div className={styles.conversations}>
-              {conversations.map((conversation) => (
-                <div className={styles.conversationDiv}>
+              {conversations.map((conversation, index) => (
+                <div className={styles.conversationDiv} key={index}>
                     <div
                       className={styles.conversation}
                       onClick={() => handleConversationClick(
@@ -191,7 +180,8 @@ const Chat = () => {
                 />
                   <button onClick={createMessage}><FiSend/></button>
                 </div>
-                    </div>*/}
+
+                    </div>
             </div>
     );          
 };

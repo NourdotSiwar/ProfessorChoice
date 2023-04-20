@@ -17,37 +17,19 @@ const EditComment = ({postId, token, comment}) => {
       const [editedComment, setEditedComment] = useState(comment.comment_content)
       const navigate = useNavigate();
 
-      const onCommentUpdate = () => {
-            window.location.reload();
-            navigate(`/post/${postId}`);
-      }
-
-      useEffect(() => {
-            const fetchComment = async () => {
-                  const { data } = await supabase
-                  .from('comments')
-                  .select()
-                  .eq('comment_id', id)
-
-                  //setComment(data[0]);
-                  
-            }
-            fetchComment().catch(console.error);
-      }, [id]);
 
       const handleEditClick = () => {
             setEditing(true);
       }
 
-      const handleSaveClick = async (e) => {
-            e.preventDefault();
+      const handleSaveClick = async () => {
             await supabase
             .from('comments')
             .update({ comment_content: editedComment })
             .eq('comment_id', comment.comment_id)
 
+            window.location.reload();
             setEditing(false);
-            onCommentUpdate();
       }
 
       const handleCancelClick = () => {
@@ -67,7 +49,8 @@ const EditComment = ({postId, token, comment}) => {
                 .delete()
                 .eq('comment_id', comment.comment_id);
         
-              onCommentUpdate();
+                // reload the page
+                window.location.reload();
             }
           };
 

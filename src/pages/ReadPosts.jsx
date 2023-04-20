@@ -47,6 +47,9 @@ const ReadPosts = ({token}) => {
                         filtered = searchPost(filtered);
                   }
                   setFilteredPosts(filtered);
+                  //console.log(filteredPosts)
+                 // console.log(searchInput)
+                 // console.log(post)
             }, [flair, searchInput, post]);
 
             const handleSearch = (e) => {
@@ -69,6 +72,7 @@ const ReadPosts = ({token}) => {
                               console.log(error);
                             } else {
                               setPost(data);
+                              //console.log(order)
                             }
                   }, 500);
                 };

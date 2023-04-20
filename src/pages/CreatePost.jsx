@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { supabase } from '../client';
 import styles from './styles/CreatePost.module.css';
 import { MdOutlineArrowBack } from 'react-icons/md';
@@ -14,7 +14,7 @@ const CreatePost = () => {
     const [isQuestionOpen, setIsQuestionOpen] = useState(false);
     const [isOpinionOpen, setIsOpinionOpen] = useState(false);
 
-    React.useEffect(() => {
+    useEffect(() => {
         const session = supabase.auth.session;
         setUser(session?.user ?? null);
 
@@ -23,6 +23,8 @@ const CreatePost = () => {
         }  = supabase.auth.onAuthStateChange(async (event, session) => {
             setUser(session?.user ?? null); });
 
+            
+        //  console.log(supabase);
         return () => {
             authListener.unsubscribe;
         };
@@ -64,9 +66,10 @@ const CreatePost = () => {
     const handleEmptyForm = (event) => {
         event.preventDefault();
       
-        if (title === '' || content === '' || 
+        if (title === '' || content === '' || flair === '' ||
         (flair === 'question' && content.length < 100) ||
-        (flair === 'opinion' && content.length < 250)) {
+        (flair === 'opinion' && content.length < 250)
+        ) {
           let message = '';
           if (flair === '') {
             message += 'Flair required.\n';
