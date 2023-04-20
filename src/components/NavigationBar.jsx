@@ -1,6 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import styles from './styles/NavigationBar.module.css';
+import Chat from '../pages/Chat';
+import { useParams } from "react-router-dom"
 
 const NavigationBar = () => {
 
@@ -17,6 +19,9 @@ const NavigationBar = () => {
           <li>
            <Link style={{color: '#2a96a1', textDecoration: "none"}} to="/create">Create Post</Link>
           </li>
+            <li>
+            <Link style={{color: '#2a96a1', textDecoration: "none"}} to="/chat">Chats</Link>
+            </li>
           <li>
             <Link style={{color: '#2a96a1', textDecoration: "none"}} to="/account">Account</Link>
           </li>

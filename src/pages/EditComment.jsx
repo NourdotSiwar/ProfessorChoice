@@ -17,37 +17,19 @@ const EditComment = ({postId, token, comment}) => {
       const [editedComment, setEditedComment] = useState(comment.comment_content)
       const navigate = useNavigate();
 
-      const onCommentUpdate = () => {
-            window.location.reload();
-            navigate(`/post/${postId}`);
-      }
-
-      useEffect(() => {
-            const fetchComment = async () => {
-                  const { data } = await supabase
-                  .from('comments')
-                  .select()
-                  .eq('comment_id', id)
-
-                  //setComment(data[0]);
-                  
-            }
-            fetchComment().catch(console.error);
-      }, [id]);
 
       const handleEditClick = () => {
             setEditing(true);
       }
 
-      const handleSaveClick = async (e) => {
-            e.preventDefault();
+      const handleSaveClick = async () => {
             await supabase
             .from('comments')
             .update({ comment_content: editedComment })
             .eq('comment_id', comment.comment_id)
 
+            window.location.reload();
             setEditing(false);
-            onCommentUpdate();
       }
 
       const handleCancelClick = () => {
@@ -67,7 +49,8 @@ const EditComment = ({postId, token, comment}) => {
                 .delete()
                 .eq('comment_id', comment.comment_id);
         
-              onCommentUpdate();
+                // reload the page
+                window.location.reload();
             }
           };
 
@@ -75,11 +58,7 @@ const EditComment = ({postId, token, comment}) => {
             <div className={styles.comment}>
             <div className={styles.commentHeader}>
               <div className={styles.commentInfo}>
-<<<<<<< HEAD
                 <p style={{fontWeight: 'bold'}}>Posted {moment(comment.created_at).fromNow()}</p>
-=======
-                <p>Posted {moment(comment.created_at).fromNow()}</p>
->>>>>>> 72e85c056f0cb217e3508ab824683535961a358a
                 <div className={styles.commentActions}>
                 {comment.user_id === token.user.id && (
                   <>
@@ -90,11 +69,7 @@ const EditComment = ({postId, token, comment}) => {
                         <button onClick={handleCancelClick}><GiCancel/></button>
                       </>
                     )}
-<<<<<<< HEAD
                     <button className={styles.trashBtn} onClick={handleDeleteClick}><MdDelete/></button>
-=======
-                    <button onClick={handleDeleteClick}><MdDelete/></button>
->>>>>>> 72e85c056f0cb217e3508ab824683535961a358a
                     </>
                 )}
                 <Report/>

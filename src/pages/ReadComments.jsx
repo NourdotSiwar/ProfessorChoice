@@ -16,6 +16,7 @@ const ReadComments = ({ token, postId }) => {
             .order('created_at', { ascending: false });
 
           setComments(data);
+         // console.log(postId)
         };
         fetchComments().catch(console.error);
       }, [postId]);

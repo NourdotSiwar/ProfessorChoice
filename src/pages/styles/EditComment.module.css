@@ -41,7 +41,6 @@
   line-height: 1.5;
 }
 
-<<<<<<< HEAD
 .trashBtn:hover{
   color: red;
 }
@@ -49,8 +48,6 @@ button:hover{
   color: #2a96a1;
 }
 
-=======
->>>>>>> 72e85c056f0cb217e3508ab824683535961a358a
 .commentBody textarea {
   width: 95%;
   height: 10rem;

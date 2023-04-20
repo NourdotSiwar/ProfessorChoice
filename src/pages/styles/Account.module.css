@@ -80,10 +80,10 @@
       padding: 1rem;
       border-radius: 0.5rem;
       box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-      margin-bottom: 2rem;
+      margin-bottom: 5rem;
       width: 30rem;
-      height: 20rem;
-      margin-top: 2rem;
+      margin-top: 1rem;
+      font-size: 1.1rem;
       
     }
     .profile button {
@@ -134,12 +134,9 @@
       padding: 1rem;
       border-radius: 0.5rem;
       box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-      margin-bottom: 2rem;
+      margin-bottom: 2.5rem;
       width: 20rem;
-      margin-top: 40px;
-      margin-left: 10px;
-      margin-right: 10px;
-      margin-bottom: 50px;
+      margin-top: 1rem;
   }
 
   .commentCount, .postCount {
@@ -160,11 +157,7 @@
 
   .viewBtn:hover {
     background-color: #ccc;
-<<<<<<< HEAD
     color: #2a96a1;
-=======
-    color: teal;
->>>>>>> 72e85c056f0cb217e3508ab824683535961a358a
   }
 
   .read-more{

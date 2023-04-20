@@ -1,12 +1,11 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import { supabase } from "../client";
 import styles from "./styles/Chat.module.css";
-<<<<<<< HEAD
 import { FiSend } from "react-icons/fi";
-=======
->>>>>>> 72e85c056f0cb217e3508ab824683535961a358a
+import { useParams } from "react-router-dom";
 
-const Chat = () => {
+
+const Chat = ({token}) => {
       const [messages, setMessages] = useState([]);
       const [message, setMessage] = useState({content: ''});
       const {content} = message;
@@ -14,44 +13,31 @@ const Chat = () => {
       const[conversations, setConversations] = useState([])
       const[selectedConversation, setSelectedConversation] = useState(null)
       const messagesEndRef = React.createRef()
+      const { user_id } = useParams();
 
-<<<<<<< HEAD
-      /*
-=======
->>>>>>> 72e85c056f0cb217e3508ab824683535961a358a
       useEffect(() => {
         messagesEndRef.current?.scrollIntoView({ behavior: "smooth" })
+        //console.log(messages)
       }, [messages])
 
       useEffect(() => {
-              const { data: authListener } = supabase.auth.onAuthStateChange(async (event, session) => {
-                    setUser(session?.user ?? null)
-              })
-
-              return () => {
-                    authListener.unsubscribe
-              }
-        }, [])
-
-      useEffect(() => {
-          const fetchUserData = async () => {
-                if(user) {
-                const { data, error } = await supabase
-                .from('users')
-                .select('*')
-                .eq('id', user.id)
-                .maybeSingle();
-
-                if (error) console.log('error fetching user data:', error)
-                else {
-                      setUser(data);
-                }
-
+        if (!token || !token.user) return;
+        const fetchUser = async () => {
+          const { data, error } = await supabase
+            .from('users')
+            .select('*')
+            .eq('id', token.user.id)
+            .single();
+      
+          if (error) console.log('error fetching user:', error);
+          else {
+            setUser(data);
+            //console.log(data)
           }
-      }
-          fetchUserData().catch(console.error);
-      }, [user])
-
+        };
+      
+        fetchUser();
+      }, [token]);
 
       useEffect(() => {
               const profiles = supabase
@@ -76,7 +62,6 @@ const Chat = () => {
             }, []);
 
       const createMessage = async () => {
-        const { data, error } =
         await supabase
         .from("messages")
         .insert([
@@ -98,19 +83,13 @@ const Chat = () => {
           .select('*')
           .or(`receiver_id.eq.${user.id}, sender_id.eq.${user.id}`)
           .or(`receiver_id.eq.${otherUserId}, sender_id.eq.${otherUserId}`)
-
           .order('created_at', { ascending: true })
+
         if (error) {
           console.log('error fetching messages:', error);
-          console.log(otherUserId)
         } else {
-<<<<<<< HEAD
-          
           setMessages(messages);
           console.log(messages)
-=======
-          setMessages(messages);
->>>>>>> 72e85c056f0cb217e3508ab824683535961a358a
         }
       };
         
@@ -149,27 +128,20 @@ const Chat = () => {
                   }
                 }
                 setConversations(newConversations);
+                //console.log(user)
               }
             }
           };
           fetchConversations().catch(console.error);
         }, [user]);
-<<<<<<< HEAD
-        */
+
 
       return (
         <div className={styles.chatDiv}>
-          {/*
-=======
-        
-
-      return (
-        <div className={styles.chatDiv}>
->>>>>>> 72e85c056f0cb217e3508ab824683535961a358a
           <div className={styles.sideChats}>
             <div className={styles.conversations}>
-              {conversations.map((conversation) => (
-                <div className={styles.conversationDiv}>
+              {conversations.map((conversation, index) => (
+                <div className={styles.conversationDiv} key={index}>
                     <div
                       className={styles.conversation}
                       onClick={() => handleConversationClick(
@@ -200,7 +172,6 @@ const Chat = () => {
                 ))}
               </div>
               <div className={styles.input}>
-<<<<<<< HEAD
                 <textarea
                   className={styles.textarea}
                   placeholder="Type a message..."
@@ -209,18 +180,8 @@ const Chat = () => {
                 />
                   <button onClick={createMessage}><FiSend/></button>
                 </div>
-                    </div>*/}
-=======
-                <input
-                  type="text"
-                  placeholder="Type a message"
-                  value={content}
-                  onChange={(e) => setMessage({content: e.target.value})}
-                  />
-                  <button onClick={createMessage}>Send</button>
-                </div>
-              </div>
->>>>>>> 72e85c056f0cb217e3508ab824683535961a358a
+
+                    </div>
             </div>
     );          
 };

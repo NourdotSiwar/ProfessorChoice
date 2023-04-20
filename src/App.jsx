@@ -13,6 +13,7 @@ import CreateComment from './pages/CreateComment'
 import EditComment from './pages/EditComment'
 import NavigationBar from './components/NavigationBar'
 import Profile from './pages/Profile'
+import Chat from './pages/Chat'
 
 
 function App() {
@@ -85,7 +86,15 @@ function App() {
     },
     {
     path: '/profile/:user_id',
-    element: <Profile/>
+    element: <Profile token={token}/>
+    },
+    {
+      path: '/chat',
+      element: <Chat token={token}/>
+    },
+    {
+    path: '/chat/:user_id',
+    element: <Chat token={token}/>
     }
     ]);
 

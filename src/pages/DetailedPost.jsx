@@ -40,9 +40,10 @@ const DetailedPost = ( {token}) => {
                   if (error) {
                         console.log('Error fetching post:', error);
                   }
+                  
+                //  console.log(postId);
             }, 0);
             }
-
             fetchPost().catch(console.error);
       }, [postId]);
 
@@ -81,7 +82,7 @@ const DetailedPost = ( {token}) => {
                   .eq('id', postId)
                   .maybeSingle();
 
-                  setPost(data);
+                  setPost({ ...post, ...data });
                   setUpvotes({ ...upvotes, [postId]: data.upvotes });
             }
         }
@@ -135,7 +136,6 @@ const DetailedPost = ( {token}) => {
       useEffect(() => {
             const fetchUsername = async () => {
                   if(!post.user_id) return;
-
                   const { data: user, error } = await supabase
                   .from('users')
                   .select('username')
@@ -146,11 +146,12 @@ const DetailedPost = ( {token}) => {
                         console.log('Error fetching username:', error);
                   } else {
                         setPost({ ...post, username: user.username });
+                       // console.log(post.user_id);
                   }
             }
 
             fetchUsername().catch(console.error);
-      }, [post]);
+      }, [post.user_id]);
 
       useEffect(() => {
             const fetchSavedPosts = async () => {
@@ -167,6 +168,7 @@ const DetailedPost = ( {token}) => {
                 console.log('Error fetching saved posts:', error);
               } else {
                 setSavedPosts(savedPosts.map((savedPost) => savedPost.post_id));
+               // console.log(token)
               }
             };
           
@@ -175,10 +177,12 @@ const DetailedPost = ( {token}) => {
           
       useEffect(() => {     
       setIsSaved(savedPosts.includes(currentPostId));
+     // console.log(savedPosts, currentPostId);
       }, [savedPosts, currentPostId]);
 
       useEffect(() => {
             setCurrentPostId(post?.id);
+            console.log(post);
       }, [post]);
 
       return (
@@ -204,8 +208,18 @@ const DetailedPost = ( {token}) => {
 
                   <div className={`${styles.flair} ${post.flair === 'question' ? styles.questionFlair : styles.opinionFlair}`}>{post.flair}</div>
                   <h1  className={styles.postTitle}>{post.title}</h1>
-                  <p className={styles.postAuthor}>By <Link to={`/profile/${post.user_id}`} style={{textDecoration:'none'}}><span className={styles.Author}>{post.username}</span></Link> </p>
-                  
+                  {
+                        post.user_id === token.user.id ? (
+                              <p className={styles.postAuthor}>Posted by you</p>
+                        ) : (
+                              <p className={styles.postAuthor}>Posted by
+                              <Link style={{textDecoration:'none'}} to={`/profile/${post.user_id}`}>
+                              <span className={styles.postAuthorName}> {post.username}</span>
+                              </Link>
+                               </p>
+                        )
+                  }
+                                   
                   <p className={styles.postContent}>{post.content}</p>
 
                   <div className={styles.upvoteCommentDiv}>

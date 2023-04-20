@@ -47,6 +47,9 @@ const ReadPosts = ({token}) => {
                         filtered = searchPost(filtered);
                   }
                   setFilteredPosts(filtered);
+                  //console.log(filteredPosts)
+                 // console.log(searchInput)
+                 // console.log(post)
             }, [flair, searchInput, post]);
 
             const handleSearch = (e) => {
@@ -69,6 +72,7 @@ const ReadPosts = ({token}) => {
                               console.log(error);
                             } else {
                               setPost(data);
+                              //console.log(order)
                             }
                   }, 500);
                 };
@@ -135,22 +139,14 @@ const ReadPosts = ({token}) => {
                                           <Report/>
                                     </div>
                                     </div>
-<<<<<<< HEAD
                                     <Link style={{color:'#2a96a1', textDecoration: 'none'}} to={`/post/${post.id}`}>
-=======
-                                    <Link style={{color:'teal', textDecoration: 'none'}} to={`/post/${post.id}`}>
->>>>>>> 72e85c056f0cb217e3508ab824683535961a358a
                                     
                                     <div className={styles.flair}>
                                     <p className={styles[`flair-${post.flair.toLowerCase()}`]}>{post.flair}</p>
                                     </div>
 
                                     <h3>{post.title}</h3>
-<<<<<<< HEAD
                                     <p className={styles.postContent}>{post.content.length > 50 ? post.content.substring(0, 50) + '...' : post.content} <Link className={styles['read-more']} style={{color:'black'}} to={`/post/${post.id}`}>more
-=======
-                                    <p className={styles.postContent}>{post.content.length > 50 ? post.content.substring(0, 50) + '...' : post.content} <Link className={styles['read-more']} style={{color:'black'}} to={`/post/${post.id}`}>More
->>>>>>> 72e85c056f0cb217e3508ab824683535961a358a
                                     </Link></p>
                                     </Link>
 
