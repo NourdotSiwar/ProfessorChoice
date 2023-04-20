@@ -39,10 +39,7 @@
       padding: 20px;
       border-radius: 10px;
       box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
-<<<<<<< HEAD
       color: black;
-=======
->>>>>>> 72e85c056f0cb217e3508ab824683535961a358a
     }
 
     .report-form.active {
@@ -73,10 +70,7 @@
       border-radius: 5px;
       border: 1px solid #cccccc;
       margin-bottom: 20px;
-<<<<<<< HEAD
       color: black;
-=======
->>>>>>> 72e85c056f0cb217e3508ab824683535961a358a
     }
 
     .report-form button {
@@ -90,10 +84,7 @@
       cursor: pointer;
       transition: all 0.3s ease-in-out;
       width: 25rem;
-<<<<<<< HEAD
       color: black;
-=======
->>>>>>> 72e85c056f0cb217e3508ab824683535961a358a
     }
     
     .report-form button:hover {

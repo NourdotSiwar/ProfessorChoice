@@ -126,6 +126,7 @@ const Account = ({token}) => {
       } 
 
             fetchSavedPosts().catch(console.error);   
+
       }, [user]) 
       
       const updateUsername = async () => {
@@ -139,7 +140,11 @@ const Account = ({token}) => {
                   setUser({ ...user, username: newUsername });
                   setNewUsername('');
             }
+      
+
       }
+
+
 
       const handleEditClick = () => {
             setEditUsername(true);
@@ -149,10 +154,12 @@ const Account = ({token}) => {
             setEditUsername(false);
             updateUsername();
       }
+
       const handleLogout = () => {
             sessionStorage.removeItem('token');
             window.location.reload();
       }
+
       useEffect(() => {
             if (user) setIsLoading(false);
              // console.log(user)

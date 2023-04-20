@@ -8,10 +8,7 @@ align-items: center;
 justify-content: center;
 background-color: #f5f5f5;
 margin-top: 5rem;
-<<<<<<< HEAD
 margin-bottom: 2rem;
-=======
->>>>>>> 72e85c056f0cb217e3508ab824683535961a358a
 box-shadow: 0 0 10px 0 rgba(0,0,0,0.2);
 border-radius: 10px;
 padding-top: 10px;
@@ -23,11 +20,7 @@ height: 15px;
 border: none;
 font-size: 1.2rem;
 cursor: pointer;
-<<<<<<< HEAD
 color: #2a96a1;
-=======
-color: teal;
->>>>>>> 72e85c056f0cb217e3508ab824683535961a358a
 margin-bottom: 10px;
 margin-top: 10px;
 }
@@ -102,11 +95,7 @@ font-family: sans-serif;
 }
 
 .wordCount{
-<<<<<<< HEAD
 color: #2a96a1;
-=======
-color: teal;
->>>>>>> 72e85c056f0cb217e3508ab824683535961a358a
 margin-right: 0rem;
 font-size: 0.9rem;
 font-weight: bold;

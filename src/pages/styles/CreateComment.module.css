@@ -1,10 +1,6 @@
 .createComment {
       padding: 10px;
       border: none;
-<<<<<<< HEAD
-=======
-      background-color: #f9f9f9;
->>>>>>> 72e85c056f0cb217e3508ab824683535961a358a
       border-radius: 5px;
       display: flex;
       flex-direction: row;
@@ -25,11 +21,7 @@
     }
     
     .createComment input[type="submit"] {
-<<<<<<< HEAD
       background-color: #2a96a1;
-=======
-      background-color: teal;
->>>>>>> 72e85c056f0cb217e3508ab824683535961a358a
       color: white;
       border: none;
       padding: 7px 10px;
@@ -42,10 +34,6 @@
 
     .createComment input[type="submit"]:hover {
       background-color: #ccc;
-<<<<<<< HEAD
       color: #2a96a1;
-=======
-      color: teal;
->>>>>>> 72e85c056f0cb217e3508ab824683535961a358a
     }
     
