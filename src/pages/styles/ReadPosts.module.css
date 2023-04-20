@@ -38,7 +38,11 @@ color: #333;
 
 .search-bar input[type="text"]:focus {
 outline: none;
+<<<<<<< HEAD
 box-shadow: 0px 8px 15px rgba(0,0,0,0.4);
+=======
+box-shadow: 0px 3px 15px rgba(0,0,0,0.4);
+>>>>>>> 72e85c056f0cb217e3508ab824683535961a358a
 }
 
 .clear-btn {
@@ -146,14 +150,21 @@ margin-bottom: 0.5rem;
 }
 
 .edit-btn:hover {
+<<<<<<< HEAD
   color:#2a96a1;
+=======
+  color: teal;
+>>>>>>> 72e85c056f0cb217e3508ab824683535961a358a
 }
 
 
 .time{
 font-size: 0.9rem;
 font-weight: bold;
+<<<<<<< HEAD
 color: black;
+=======
+>>>>>>> 72e85c056f0cb217e3508ab824683535961a358a
 }
 
 .flair {
@@ -202,7 +213,11 @@ padding-top: 10px;
 }
 
 .upvotes-btn, .comments-btn {
+<<<<<<< HEAD
 background-color:#2a96a1;
+=======
+background-color: teal;
+>>>>>>> 72e85c056f0cb217e3508ab824683535961a358a
 color: white;
 border: none;
 padding: 7px 10px;

@@ -82,6 +82,13 @@ background-color: #7798ed;
   margin-bottom: 2rem;
 }
 
+
+.postAuthorName {
+  margin: 0;
+  font-weight: bold;
+  color: black;
+}
+
 .postAuthorName {
   margin: 0;
   font-weight: bold;

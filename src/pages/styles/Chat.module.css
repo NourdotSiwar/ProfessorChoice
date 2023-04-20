@@ -69,6 +69,8 @@
     justify-content: space-between;
     align-items: center;
     padding: 10px;
+    margin-bottom: 2rem;
+    margin-top: 2rem;
 }
 
 .form {
@@ -162,5 +164,16 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background: #2a96a1;
+}
+.input button:hover {
+    cursor: pointer;
+    color: black;
+    background-color: #ccc;
+}
+.button:hover {
+    background: linear-gradient(200deg, #3c9fc3 10%, #0975f1 100%);
+    cursor: pointer;
+}
+.button:active {
+    background: #0975f1;
 }
