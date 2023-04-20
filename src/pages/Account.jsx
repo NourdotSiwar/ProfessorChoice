@@ -210,23 +210,12 @@ const Account = ({token}) => {
                               )}
                               </div>
                               <button onClick={handleLogout}>Sign Out</button>
-
-                              <div className={styles.editUsername}>
-                              {!editUsername && <button onClick={handleEditClick }>Update User</button>}
-                              {editUsername &&(
-                                    <>
-                               <input type="text" value={newUsername} onChange={(e) => setNewUsername(e.target.value)}
-                               placeholder="Enter new username" /> <button onClick={handleUpdateClick}>Update</button>
-                                    </>
-                              )}
-                              </div>
                         </div>
                   </div>
                 )}
 
                 {selectedOption === 'posts' && (
                   <div className={styles.posts}>
-                        <p style={{color:'white'}} className={styles.postCount}>Total: <span>{posts.length}</span> posts</p>
                         <div className={styles.details}>
                               {posts.map((post) => (
                                     <div className={styles.postList} key={post.id}>
@@ -243,7 +232,6 @@ const Account = ({token}) => {
             {selectedOption === 'comments' && (
                   <div className={styles.comments}>
                         <div className={styles.details}>
-                        <p style={{color:'white'}}  className={styles.commentCount}>Total: <span>{comments.length}</span> comments</p>
                               {comments.map((comment, index) => (
                                     <div className={styles.commentList} key={index}>
                                           <h4>{moment(comment.created_at).format('MMMM D, YYYY')}</h4>
@@ -257,7 +245,6 @@ const Account = ({token}) => {
 
                 {selectedOption === 'saved' && (
                   <div className={styles.saved}>
-                        <p style={{color:'white'}}  className={styles.postCount}>Total: <span>{savedPosts.length}</span> saved posts</p>
                         <div className={styles.details}>
                               {savedPosts.map((savedPost) => (
                                     <div className={styles.postList} key={savedPost.id}>

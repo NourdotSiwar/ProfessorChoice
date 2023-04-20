@@ -36,6 +36,8 @@
   margin-right: 0.5rem;
 }
 .option.active {
+  /* rgb for #2a96a1 is 42, 150, 161
+  */
   background-color: #ccc;
   border-radius: 0.5rem;
 }
@@ -44,6 +46,16 @@
   background-color: #ccc;
   transition: all 0.3s ease-in-out;
   border-radius: 0.5rem;
+  color: black;
+}
+
+.option:hover span{
+  color: black;
+}
+
+/*font black when selected*/
+.option.active{
+  color: black;
 }
 
 

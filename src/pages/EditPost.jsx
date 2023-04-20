@@ -64,7 +64,7 @@ const EditPost = () => {
       const handleEmptyForm = (event) => {
       event.preventDefault();
 
-      if (post.title === '' || post.content === '' || 
+      if (post.title === '' || post.content === '' || flair === '' ||
       (post.flair === 'question' && post.content.length < 100) ||
       (post.flair === 'opinion' && post.content.length < 250)) {
       let message = '';

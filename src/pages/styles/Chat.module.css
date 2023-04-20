@@ -164,16 +164,11 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    background-color: #2a96a1;
+    color: white;
 }
 .input button:hover {
     cursor: pointer;
     color: black;
     background-color: #ccc;
-}
-.button:hover {
-    background: linear-gradient(200deg, #3c9fc3 10%, #0975f1 100%);
-    cursor: pointer;
-}
-.button:active {
-    background: #0975f1;
 }
