@@ -8,8 +8,6 @@ Time spent: **74** hours spent in total
 
 ## Video Walkthrough
 
-Here's a walkthrough of implemented user stories:
-
 <img src='CompressedProfessorChoice.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
 
 <!-- Replace this with whatever GIF tool you used! -->
