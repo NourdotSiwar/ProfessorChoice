@@ -6,6 +6,15 @@ This web app: **This web app is a bit based off of rate my professor, in which s
 
 Time spent: **74** hours spent in total
 
+## Video Walkthrough
+
+Here's a walkthrough of implemented user stories:
+
+<img src='CompressedProfessorChoice.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+
+<!-- Replace this with whatever GIF tool you used! -->
+GIF created with ...  LiceCap!
+
 ## Required Features
 
 The following **required** functionality is completed:
@@ -47,15 +56,6 @@ The following **additional** features are implemented:
 * [X] If stuck on creating a post, users can look at hints provided on the post form to ask/write about a professor.
 * [X] On comments functionality, users can edit, delete, and update their own comments. 
 * [X] Chat feature! Users can chat with one another in realtime to ask about a specific professor if needed. 
-
-## Video Walkthrough
-
-Here's a walkthrough of implemented user stories:
-
-<img src='CompressedProfessorChoice.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
-
-<!-- Replace this with whatever GIF tool you used! -->
-GIF created with ...  LiceCap!
 
 ## Notes
 
